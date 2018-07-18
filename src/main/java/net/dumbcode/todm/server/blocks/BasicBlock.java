@@ -1,8 +1,8 @@
-package com.dumbcode.todm.server.blocks;
+package net.dumbcode.todm.server.blocks;
 
-import com.dumbcode.todm.TODM;
-import com.dumbcode.todm.server.tabs.TabHandler;
-import com.dumbcode.todm.server.utils.Utils;
+import net.dumbcode.todm.TODM;
+import net.dumbcode.todm.server.tabs.TabHandler;
+import net.dumbcode.todm.server.utils.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 

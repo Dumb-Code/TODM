@@ -1,8 +1,8 @@
-package com.dumbcode.todm.server.items;
+package net.dumbcode.todm.server.items;
 
-import com.dumbcode.todm.TODM;
-import com.dumbcode.todm.server.tabs.TabHandler;
-import com.dumbcode.todm.server.utils.Utils;
+import net.dumbcode.todm.TODM;
+import net.dumbcode.todm.server.tabs.TabHandler;
+import net.dumbcode.todm.server.utils.Utils;
 import net.minecraft.item.Item;
 
 public class BasicItem extends Item

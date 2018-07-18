@@ -1,4 +1,4 @@
-package com.dumbcode.todm.server.items;
+package net.dumbcode.todm.server.items;
 
 import com.google.common.collect.Lists;
 import net.minecraft.item.Item;

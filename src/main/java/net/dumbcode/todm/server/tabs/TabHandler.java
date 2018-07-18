@@ -1,4 +1,4 @@
-package com.dumbcode.todm.server.tabs;
+package net.dumbcode.todm.server.tabs;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;

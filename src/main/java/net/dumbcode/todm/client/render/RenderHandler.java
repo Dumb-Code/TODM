@@ -1,8 +1,8 @@
-package com.dumbcode.todm.client.render;
+package net.dumbcode.todm.client.render;
 
-import com.dumbcode.todm.TODM;
-import com.dumbcode.todm.server.blocks.BlockHandler;
-import com.dumbcode.todm.server.items.ItemHandler;
+import net.dumbcode.todm.TODM;
+import net.dumbcode.todm.server.blocks.BlockHandler;
+import net.dumbcode.todm.server.items.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -14,9 +14,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @Mod.EventBusSubscriber
 @SideOnly(Side.CLIENT)
-public enum RenderHandler
+public class RenderHandler
 {
-    INSTANCE;
 
     private static void init()
     {

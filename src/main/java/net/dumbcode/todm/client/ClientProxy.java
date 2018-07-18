@@ -1,7 +1,7 @@
-package com.dumbcode.todm.client;
+package net.dumbcode.todm.client;
 
-import com.dumbcode.todm.client.render.RenderHandler;
-import com.dumbcode.todm.server.ServerProxy;
+import net.dumbcode.todm.client.event.ClientEventHandler;
+import net.dumbcode.todm.server.ServerProxy;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -16,7 +16,7 @@ public class ClientProxy extends ServerProxy
     public void preInit(FMLPreInitializationEvent event)
     {
         super.preInit(event);
-        MinecraftForge.EVENT_BUS.register(RenderHandler.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
     }
 
     public void init(FMLInitializationEvent event)

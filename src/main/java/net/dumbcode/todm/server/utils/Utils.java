@@ -1,4 +1,4 @@
-package com.dumbcode.todm.server.utils;
+package net.dumbcode.todm.server.utils;
 
 import java.util.Locale;
 

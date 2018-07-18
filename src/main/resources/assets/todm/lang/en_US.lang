@@ -1,6 +1,11 @@
 #Items
-item.test.name=Test
+item.test.name=Test Item
 
 #Blocks
+tile.test_block.name=Test Block
 
 #Entities
+
+#Creative Tabs
+itemGroup.todm.items=Items
+itemGroup.todm.blocks=Blocks

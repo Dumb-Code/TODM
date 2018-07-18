@@ -1,4 +1,4 @@
-package com.dumbcode.todm.server.blocks;
+package net.dumbcode.todm.server.blocks;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;

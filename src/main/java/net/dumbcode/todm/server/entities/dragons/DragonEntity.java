@@ -1,4 +1,4 @@
-package com.dumbcode.todm.server.entities.dragons;
+package net.dumbcode.todm.server.entities.dragons;
 
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.world.World;

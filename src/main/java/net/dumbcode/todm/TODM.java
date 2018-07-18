@@ -1,6 +1,6 @@
-package com.dumbcode.todm;
+package net.dumbcode.todm;
 
-import com.dumbcode.todm.server.ServerProxy;
+import net.dumbcode.todm.server.ServerProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -21,7 +21,7 @@ public class TODM
     @Mod.Instance
     public static TODM instance;
 
-    @SidedProxy(serverSide = "com.dumbcode.todm.server.ServerProxy", clientSide = "com.dumbcode.todm.client.ClientProxy")
+    @SidedProxy(serverSide = "net.dumbcode.todm.server.ServerProxy", clientSide = "net.dumbcode.todm.client.ClientProxy")
     public static ServerProxy proxy;
 
     public static Logger logger;

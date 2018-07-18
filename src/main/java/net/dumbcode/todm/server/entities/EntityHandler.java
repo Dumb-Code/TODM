@@ -1,4 +1,4 @@
-package com.dumbcode.todm.server.entities;
+package net.dumbcode.todm.server.entities;
 
 public class EntityHandler
 {
