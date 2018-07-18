@@ -12,7 +12,7 @@ Say what the step will be
 git clone https://github.com/<Your Username>/TODM.git
 ```
 
-When that's done, go into the newly created directory `TOMD` and run in the console if you're on Windows:
+When that's done, go into the newly created directory `TODM` and run in the console if you're on Windows:
 ```
 gradlew.bat setupDecompWorkspace
 ```
