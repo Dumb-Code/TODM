@@ -1,7 +1,9 @@
 package net.dumbcode.todm.server.creatures;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.Data;
+import net.dumbcode.todm.client.render.animal.PoseHandler;
 import net.dumbcode.todm.server.creatures.attributes.Diet;
 import net.dumbcode.todm.server.creatures.attributes.GrowthStage;
 import net.dumbcode.todm.server.creatures.attributes.Overlay;
@@ -10,12 +12,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Map;
 
 @Data
 public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
 {
 
+    private List<GrowthStage> modelGrowthStages = Lists.newArrayList(GrowthStage.ADULT);
     private Map<Overlay, Map<GrowthStage, ResourceLocation>> overlays = Maps.newHashMap();
 
     private Class<? extends AnimalEntity> entityClass;
@@ -39,4 +44,16 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
     private GrowthStage growthStage;
 
     private Biome[] spawnBiomes;
+
+    private PoseHandler poseHandler;
+
+    @Nonnull
+    public ResourceLocation getRegName()
+    {
+        if (this.getRegistryName() == null)
+        {
+            throw new RuntimeException("Null Registry Name Found");
+        }
+        return this.getRegistryName();
+    }
 }
