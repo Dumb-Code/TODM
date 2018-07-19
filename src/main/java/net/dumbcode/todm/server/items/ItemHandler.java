@@ -1,6 +1,7 @@
 package net.dumbcode.todm.server.items;
 
 import com.google.common.collect.Lists;
+import net.dumbcode.todm.server.items.weapons.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -12,13 +13,13 @@ import java.util.List;
 public class ItemHandler
 {
 
-    public static final BasicItem TEST = new BasicItem("Test");
+    public static final CrossbowItem CROSSBOW = new CrossbowItem("Crossbow");
 
     public static List<Item> items = Lists.newArrayList();
 
     public static void init()
     {
-        items.add(TEST);
+        items.add(CROSSBOW);
     }
 
     @SubscribeEvent

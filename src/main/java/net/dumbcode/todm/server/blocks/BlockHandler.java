@@ -2,7 +2,6 @@ package net.dumbcode.todm.server.blocks;
 
 import com.google.common.collect.Lists;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -15,14 +14,14 @@ import java.util.List;
 public class BlockHandler
 {
 
-    public static final BasicBlock TEST = new BasicBlock(Material.ANVIL, "Test Block");
+    public static final DeadGrassBlock DEAD_GRASS = new DeadGrassBlock("Dead Grass");
 
 
     private static List<Block> blocks = Lists.newArrayList();
 
     public static void init()
     {
-        blocks.add(TEST);
+        blocks.add(DEAD_GRASS);
     }
 
     private static void registerTileEntities()

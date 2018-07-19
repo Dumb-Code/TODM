@@ -19,8 +19,8 @@ public class RenderHandler
 
     private static void init()
     {
-        registerItemRenderer(ItemHandler.TEST, ItemHandler.TEST.getFormattedName());
-        registerItemRenderer(Item.getItemFromBlock(BlockHandler.TEST), BlockHandler.TEST.getFormattedName());
+        registerItemRenderer(ItemHandler.CROSSBOW, "crossbow");
+        registerItemRenderer(Item.getItemFromBlock(BlockHandler.DEAD_GRASS), "dead_grass");
     }
 
     private static void registerItemRenderer(Item item, String id)

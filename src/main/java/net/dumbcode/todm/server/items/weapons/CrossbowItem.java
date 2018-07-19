@@ -1,15 +1,16 @@
-package net.dumbcode.todm.server.items;
+package net.dumbcode.todm.server.items.weapons;
 
 import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.tabs.TabHandler;
 import net.dumbcode.todm.server.utils.Utils;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
 
-public class BasicItem extends Item
+public class CrossbowItem extends ItemBow
 {
 
-    public BasicItem(String name)
+    public CrossbowItem(String name)
     {
+        super();
         this.setCreativeTab(TabHandler.ITEMS);
         String formattedName = Utils.formatString(name);
         this.setUnlocalizedName(formattedName);

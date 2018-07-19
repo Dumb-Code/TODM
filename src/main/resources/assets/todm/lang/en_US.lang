@@ -1,8 +1,8 @@
 #Items
-item.test.name=Test Item
+item.crossbow.name=Crossbow
 
 #Blocks
-tile.test_block.name=Test Block
+tile.dead_grass.name=Dead Grass
 
 #Entities
 
