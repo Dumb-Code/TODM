@@ -1,7 +1,6 @@
 package net.dumbcode.todm.client.render;
 
 import net.dumbcode.todm.TODM;
-import net.dumbcode.todm.server.blocks.BlockHandler;
 import net.dumbcode.todm.server.items.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -20,7 +19,6 @@ public class RenderHandler
     private static void init()
     {
         registerItemRenderer(ItemHandler.CROSSBOW, "crossbow");
-        registerItemRenderer(Item.getItemFromBlock(BlockHandler.DEAD_GRASS), "dead_grass");
     }
 
     private static void registerItemRenderer(Item item, String id)

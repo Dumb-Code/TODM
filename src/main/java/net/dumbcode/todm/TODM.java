@@ -45,4 +45,9 @@ public class TODM
     {
         proxy.postInit(event);
     }
+
+    public static Logger getLogger()
+    {
+        return logger;
+    }
 }

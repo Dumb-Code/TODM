@@ -14,14 +14,10 @@ import java.util.List;
 public class BlockHandler
 {
 
-    public static final DeadGrassBlock DEAD_GRASS = new DeadGrassBlock("Dead Grass");
-
-
     private static List<Block> blocks = Lists.newArrayList();
 
     public static void init()
     {
-        blocks.add(DEAD_GRASS);
     }
 
     private static void registerTileEntities()
