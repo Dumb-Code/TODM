@@ -4,8 +4,10 @@ import io.netty.buffer.ByteBuf;
 import lombok.Data;
 import net.dumbcode.todm.server.api.EntityAnimatable;
 import net.dumbcode.todm.server.creatures.Animal;
+import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
@@ -14,10 +16,22 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
 {
 
     private Animal animal;
+    private MetabolismContainer metabolism;
+    private EntityAITasks tasks;
+    private boolean isCarcass = false;
 
-    public AnimalEntity(World worldIn)
+    public AnimalEntity(World world, Animal animal)
     {
-        super(worldIn);
+        super(world);
+        this.animal = animal;
+        this.tasks = new EntityAITasks(world.profiler);
+        this.metabolism = new MetabolismContainer();
+    }
+
+    public AnimalEntity(World world)
+    {
+        super(world);
+        this.animal = animal;
     }
 
     @Override

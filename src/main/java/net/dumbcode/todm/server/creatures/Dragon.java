@@ -1,7 +1,9 @@
 package net.dumbcode.todm.server.creatures;
 
-import net.minecraftforge.registries.IForgeRegistryEntry;
+import lombok.Data;
 
-public abstract class Dragon extends IForgeRegistryEntry.Impl<Dragon>
+@Data
+public abstract class Dragon extends Animal
 {
+
 }

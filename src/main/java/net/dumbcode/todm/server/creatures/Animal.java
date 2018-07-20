@@ -47,6 +47,8 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
 
     private PoseHandler poseHandler;
 
+    public static Animal MISSING = null;
+
     @Nonnull
     public ResourceLocation getRegName()
     {

@@ -1,15 +1,27 @@
 package net.dumbcode.todm.server.entities.dragons;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.EntityCreature;
+import net.dumbcode.todm.server.creatures.Dragon;
+import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-public class DragonEntity extends EntityCreature implements IEntityAdditionalSpawnData
+public class DragonEntity extends AnimalEntity implements IEntityAdditionalSpawnData
 {
-    public DragonEntity(World worldIn)
+
+    private Dragon dragon;
+
+    public DragonEntity(World worldIn, Dragon dragon)
     {
         super(worldIn);
+        this.dragon = dragon;
+    }
+
+    public DragonEntity(World worldIn)
+    {
+        //TODO: Set a default dragon
+        this(worldIn, null);
+        this.enablePersistence();
     }
 
     @Override
