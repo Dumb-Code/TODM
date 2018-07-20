@@ -1,11 +1,13 @@
 package net.dumbcode.todm;
 
 import net.dumbcode.todm.server.ServerProxy;
+import net.dumbcode.todm.server.commands.TODMCommand;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = TODM.MODID, name = TODM.NAME, version = TODM.VERSION, dependencies = "required-after:llibrary@[" + TODM.LLIB_VERSION + ",);required-after:forge@[14.23.4.2705,)")
@@ -49,5 +51,11 @@ public class TODM
     public static Logger getLogger()
     {
         return logger;
+    }
+
+    @Mod.EventHandler
+    public void onServerStart(FMLServerStartingEvent event)
+    {
+        event.registerServerCommand(new TODMCommand());
     }
 }

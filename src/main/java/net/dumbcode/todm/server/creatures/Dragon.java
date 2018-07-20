@@ -1,8 +1,10 @@
 package net.dumbcode.todm.server.creatures;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public abstract class Dragon extends Animal
 {
 

@@ -8,10 +8,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'io.franzbecker.gradle-lombok' version '1.14'
-}
-
 group 'com.dumbcode.todm'
 version '1.0-SNAPSHOT'
 
@@ -36,6 +32,7 @@ repositories {
 
 dependencies {
     compile "net.ilexiconn:llibrary:1.7.9-1.12.2:dev"
+    compile 'org.projectlombok:lombok:1.18.0'
 }
 
 processResources {

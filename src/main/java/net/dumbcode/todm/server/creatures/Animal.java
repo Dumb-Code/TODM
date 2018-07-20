@@ -2,7 +2,8 @@ package net.dumbcode.todm.server.creatures;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import net.dumbcode.todm.client.render.animal.PoseHandler;
 import net.dumbcode.todm.server.creatures.attributes.Diet;
 import net.dumbcode.todm.server.creatures.attributes.GrowthStage;
@@ -16,7 +17,8 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Map;
 
-@Data
+@Setter
+@Getter
 public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
 {
 
@@ -32,6 +34,9 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
     private int secondaryEggColorMale, secondaryEggColorFemale;
     private int maximumAge;
     private int spawnChance;
+    private int fullAmount;
+    private int hungryAmount;
+    private int starvingAmount;
     private double babyHealth, adultHealth;
     private double babyStrength, adultStrength;
     private double babySpeed, adultSpeed;

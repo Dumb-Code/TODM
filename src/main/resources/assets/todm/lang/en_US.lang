@@ -1,11 +1,14 @@
 #Items
 item.crossbow.name=Crossbow
+item.longsword_diamond.name=Diamond Longsword
+item.longsword_gold.name=Gold Longsword
 
 #Blocks
-tile.dead_grass.name=Dead Grass
+
 
 #Entities
 
 #Creative Tabs
 itemGroup.todm.items=Items
 itemGroup.todm.blocks=Blocks
+itemGroup.todm.weapons=Weapons

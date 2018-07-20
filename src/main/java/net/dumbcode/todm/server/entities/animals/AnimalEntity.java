@@ -1,7 +1,8 @@
 package net.dumbcode.todm.server.entities.animals;
 
 import io.netty.buffer.ByteBuf;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import net.dumbcode.todm.server.api.EntityAnimatable;
 import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
@@ -11,7 +12,8 @@ import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
-@Data
+@Getter
+@Setter
 public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpawnData, EntityAnimatable
 {
 
@@ -25,13 +27,19 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         super(world);
         this.animal = animal;
         this.tasks = new EntityAITasks(world.profiler);
-        this.metabolism = new MetabolismContainer();
+        this.metabolism = new MetabolismContainer(animal);
     }
 
     public AnimalEntity(World world)
     {
         super(world);
-        this.animal = animal;
+    }
+
+    @Override
+    public void onUpdate()
+    {
+        super.onUpdate();
+        //metabolism.update(this);
     }
 
     @Override
