@@ -41,6 +41,7 @@ gradlew.bat idea
 * [Jack Goldsworth](https://github.com/JackGoldsworth)
 * [Wyn Price](https://github.com/Wyn-Price)
 * [TheXFactor117](https://github.com/TheXFactor117)
+* [jglrxavpok](https://github.com/jglrxavpok)
 
 #### Modelers
 * HarvNut
