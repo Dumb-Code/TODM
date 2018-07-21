@@ -1,7 +1,7 @@
 package net.dumbcode.todm.server.commands;
 
 import com.google.common.collect.Lists;
-import net.dumbcode.todm.server.creatures.Animal;
+import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.dumbcode.todm.server.entities.EntityHandler;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.command.CommandBase;

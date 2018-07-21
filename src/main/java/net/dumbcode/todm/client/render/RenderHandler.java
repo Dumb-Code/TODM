@@ -19,6 +19,9 @@ public class RenderHandler
     private static void init()
     {
         registerItemRenderer(ItemHandler.CROSSBOW, "crossbow");
+        registerItemRenderer(ItemHandler.LONGSWORD_DIAMOND, "longsword_diamond");
+        registerItemRenderer(ItemHandler.LONGSWORD_GOLD, "longsword_gold");
+        registerItemRenderer(ItemHandler.LONGSWORD_IRON, "longsword_iron");
     }
 
     private static void registerItemRenderer(Item item, String id)

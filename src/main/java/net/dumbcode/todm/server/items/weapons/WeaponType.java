@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public enum WeaponType
 {
-    GOLD, DIAMOND, MAGIC
+    GOLD, DIAMOND, IRON, MAGIC
 }

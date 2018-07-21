@@ -1,11 +1,11 @@
-package net.dumbcode.todm.server.creatures;
+package net.dumbcode.todm.server.creatures.animal;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
+import net.dumbcode.dumblibrary.server.entity.GrowthStage;
 import net.dumbcode.todm.server.creatures.attributes.Diet;
-import net.dumbcode.todm.server.creatures.attributes.GrowthStage;
 import net.dumbcode.todm.server.creatures.attributes.Overlay;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.util.ResourceLocation;

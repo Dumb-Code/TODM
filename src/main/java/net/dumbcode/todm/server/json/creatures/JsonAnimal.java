@@ -1,7 +1,7 @@
 package net.dumbcode.todm.server.json.creatures;
 
 import com.google.gson.*;
-import net.dumbcode.todm.server.creatures.Animal;
+import net.dumbcode.todm.server.creatures.animal.Animal;
 
 import java.lang.reflect.Type;
 

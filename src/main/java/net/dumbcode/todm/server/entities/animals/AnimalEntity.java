@@ -3,7 +3,7 @@ package net.dumbcode.todm.server.entities.animals;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import lombok.Setter;
-import net.dumbcode.todm.server.creatures.Animal;
+import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAITasks;
@@ -26,6 +26,7 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         this.animal = animal;
         this.tasks = new EntityAITasks(world.profiler);
         this.metabolism = new MetabolismContainer(animal);
+        this.initMetabolism();
     }
 
     public AnimalEntity(World world)
@@ -37,7 +38,15 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     public void onUpdate()
     {
         super.onUpdate();
-        //metabolism.update(this);
+        if (!this.world.isRemote)
+        {
+            metabolism.update(this);
+        }
+    }
+
+    public void initMetabolism()
+    {
+        metabolism.setDecreaseRate(2);
     }
 
     @Override

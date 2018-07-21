@@ -26,7 +26,7 @@ public class TabHandler {
         @Override
         public ItemStack getTabIconItem()
         {
-            return new ItemStack(ItemHandler.CROSSBOW);
+            return new ItemStack(ItemHandler.LONGSWORD_DIAMOND);
         }
     };
 }

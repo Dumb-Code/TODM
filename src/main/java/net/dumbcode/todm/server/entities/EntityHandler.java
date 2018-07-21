@@ -1,7 +1,8 @@
 package net.dumbcode.todm.server.entities;
 
 import net.dumbcode.todm.TODM;
-import net.dumbcode.todm.server.creatures.Animal;
+import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.animal.TestAnimal;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -26,7 +27,7 @@ public class EntityHandler
     {
         event.getRegistry().register(EntityEntryBuilder.create()
                 .entity(AnimalEntity.class)
-                .factory(AnimalEntity::new)
+                .factory(s -> new AnimalEntity(s.getMinecraftServer().getEntityWorld(), new TestAnimal("Test")))
                 .name(TODM.MODID + ".animal")
                 .tracker(64, 1, true)
                 .id(new ResourceLocation(TODM.MODID, "animal"), 0)

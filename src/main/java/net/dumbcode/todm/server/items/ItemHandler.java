@@ -18,6 +18,7 @@ public class ItemHandler
     public static final CrossbowItem CROSSBOW = new CrossbowItem("Crossbow");
     public static final LongSwordItem LONGSWORD_DIAMOND = new LongSwordItem("Longsword", Item.ToolMaterial.DIAMOND, WeaponType.DIAMOND);
     public static final LongSwordItem LONGSWORD_GOLD = new LongSwordItem("Longsword", Item.ToolMaterial.GOLD, WeaponType.GOLD);
+    public static final LongSwordItem LONGSWORD_IRON = new LongSwordItem("Longsword", Item.ToolMaterial.GOLD, WeaponType.IRON);
 
     public static List<Item> items = Lists.newArrayList();
 
@@ -26,6 +27,7 @@ public class ItemHandler
         items.add(CROSSBOW);
         items.add(LONGSWORD_DIAMOND);
         items.add(LONGSWORD_GOLD);
+        items.add(LONGSWORD_IRON);
     }
 
     @SubscribeEvent

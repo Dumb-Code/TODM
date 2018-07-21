@@ -11,7 +11,7 @@ public class CrossbowItem extends ItemBow
     public CrossbowItem(String name)
     {
         super();
-        this.setCreativeTab(TabHandler.ITEMS);
+        this.setCreativeTab(TabHandler.WEAPONS);
         String formattedName = Utils.formatString(name);
         this.setUnlocalizedName(formattedName);
         this.setRegistryName(TODM.MODID, formattedName);
