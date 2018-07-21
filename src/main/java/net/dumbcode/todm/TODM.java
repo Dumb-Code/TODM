@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TODM.MODID, name = TODM.NAME, version = TODM.VERSION, dependencies = "required-after:llibrary@[" + TODM.LLIB_VERSION + ",);required-after:forge@[14.23.4.2705,)")
+@Mod(modid = TODM.MODID, name = TODM.NAME, version = TODM.VERSION, dependencies = "required-after:dumblibrary@[" + TODM.DC_LIB + ",);required-after:llibrary@[" + TODM.LLIB_VERSION + ",);required-after:forge@[14.23.4.2705,)")
 public class TODM
 {
 
@@ -19,6 +19,7 @@ public class TODM
     public static final String VERSION = "0.0.1";
 
     public static final String LLIB_VERSION = "1.7.9";
+    public static final String DC_LIB = "0.0.2";
 
     @Mod.Instance
     public static TODM instance;

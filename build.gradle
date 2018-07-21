@@ -8,7 +8,7 @@ buildscript {
     }
 }
 
-group 'com.dumbcode.todm'
+group 'net.dumbcode.todm'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -25,13 +25,21 @@ minecraft {
 repositories {
     mavenCentral()
     maven {
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
         name = "ilexiconn"
         url = "https://maven.mcmoddev.com"
+    }
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
     }
 }
 
 dependencies {
     compile "net.ilexiconn:llibrary:1.7.9-1.12.2:dev"
+    compile "dumb-library:dumblibrary-1.12.2:0.0.2:dev"
     compile 'org.projectlombok:lombok:1.18.0'
 }
 

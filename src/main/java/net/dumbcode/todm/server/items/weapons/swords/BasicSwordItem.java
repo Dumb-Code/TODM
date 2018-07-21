@@ -39,7 +39,7 @@ public class BasicSwordItem extends ItemSword
     public BasicSwordItem(String name, ToolMaterial material, float attackModifier, WeaponType type)
     {
         super(material);
-        name += "_" + type.getName();
+        name += "_" + type.name();
         String formattedName = Utils.formatString(name);
         this.setRegistryName(TODM.MODID, formattedName);
         this.setUnlocalizedName(formattedName);

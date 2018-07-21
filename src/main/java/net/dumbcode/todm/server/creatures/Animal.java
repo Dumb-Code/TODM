@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
-import net.dumbcode.todm.client.render.animal.PoseHandler;
 import net.dumbcode.todm.server.creatures.attributes.Diet;
 import net.dumbcode.todm.server.creatures.attributes.GrowthStage;
 import net.dumbcode.todm.server.creatures.attributes.Overlay;
@@ -49,8 +48,6 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
     private GrowthStage growthStage;
 
     private Biome[] spawnBiomes;
-
-    private PoseHandler poseHandler;
 
     public static Animal MISSING = null;
 

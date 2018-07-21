@@ -61,6 +61,9 @@ gradlew.bat idea
 #### Animators
 * RaptorWhisper
 
+#### Misc
+* KashMoney
+
 #### Contributors
 
 See also the list of [contributors](https://github.com/dumb-code/todm/contributors) who participated in this project.
@@ -72,3 +75,4 @@ This project is licensed under the Microsoft reference source license - see the 
 ## Acknowledgments
 
 * [LLibrary](https://minecraft.curseforge.com/projects/llibrary) - Library
+* [DumbLibrary](https://minecraft.curseforge.com/projects/dumb-library) - Library
