@@ -3,6 +3,7 @@ package net.dumbcode.todm.server.items;
 import com.google.common.collect.Lists;
 import net.dumbcode.todm.server.items.weapons.CrossbowItem;
 import net.dumbcode.todm.server.items.weapons.WeaponType;
+import net.dumbcode.todm.server.items.weapons.swords.BasicSwordItem;
 import net.dumbcode.todm.server.items.weapons.swords.LongSwordItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
@@ -18,7 +19,8 @@ public class ItemHandler
     public static final CrossbowItem CROSSBOW = new CrossbowItem("Crossbow");
     public static final LongSwordItem LONGSWORD_DIAMOND = new LongSwordItem("Longsword", Item.ToolMaterial.DIAMOND, WeaponType.DIAMOND);
     public static final LongSwordItem LONGSWORD_GOLD = new LongSwordItem("Longsword", Item.ToolMaterial.GOLD, WeaponType.GOLD);
-    public static final LongSwordItem LONGSWORD_IRON = new LongSwordItem("Longsword", Item.ToolMaterial.GOLD, WeaponType.IRON);
+    public static final LongSwordItem LONGSWORD_IRON = new LongSwordItem("Longsword", Item.ToolMaterial.IRON, WeaponType.IRON);
+    public static final LongSwordItem LONGSWORD_SCORCHING = new LongSwordItem("Longsword", Item.ToolMaterial.IRON, WeaponType.SCORCHING);
 
     public static List<Item> items = Lists.newArrayList();
 
@@ -28,6 +30,7 @@ public class ItemHandler
         items.add(LONGSWORD_DIAMOND);
         items.add(LONGSWORD_GOLD);
         items.add(LONGSWORD_IRON);
+        items.add(LONGSWORD_SCORCHING);
     }
 
     @SubscribeEvent

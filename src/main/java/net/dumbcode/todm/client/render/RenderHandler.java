@@ -32,12 +32,13 @@ public class RenderHandler
         registerItemRenderer(ItemHandler.CROSSBOW, "crossbow");
         registerItemRenderer(ItemHandler.LONGSWORD_DIAMOND, "longsword_diamond.ttm");
         registerItemRenderer(ItemHandler.LONGSWORD_GOLD, "longsword_gold.ttm");
-        registerItemRenderer(ItemHandler.LONGSWORD_IRON, "longsword_iron");
-    }
+        registerItemRenderer(ItemHandler.LONGSWORD_IRON, "longsword_iron.ttm");
+        registerItemRenderer(ItemHandler.LONGSWORD_SCORCHING, "longsword_scorching.ttm");
+}
 
     private static void registerItemRenderer(Item item, String id)
     {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(TODM.MODID + ":" + id, "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(TODM.MODID + ":" + id, "gui"));
     }
 
     @SubscribeEvent

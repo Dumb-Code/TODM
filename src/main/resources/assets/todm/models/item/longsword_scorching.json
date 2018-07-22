@@ -1,0 +1,4 @@
+{
+  "default_model": "todm:item/longsword_scorching_inv",
+  "gui": "todm:item/longsword_scorching_gui"
+}

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "todm:items/gui/longsword_gold"
+    "layer0": "todm:items/longsword_iron"
   }
 }
