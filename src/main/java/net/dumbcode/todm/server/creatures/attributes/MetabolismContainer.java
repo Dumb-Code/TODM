@@ -11,8 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 public class MetabolismContainer
 {
 
-    private int currentFood;
-    private int currentWater;
+    private int currentFood, currentWater;
     private int maxFood, maxWater;
     private int decreaseFoodRate, decreaseWaterRate;
     private boolean starving, dehydrated;
