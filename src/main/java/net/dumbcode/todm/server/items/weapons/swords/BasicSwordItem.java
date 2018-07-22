@@ -3,7 +3,6 @@ package net.dumbcode.todm.server.items.weapons.swords;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.Setter;
 import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.items.weapons.WeaponType;
@@ -13,7 +12,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemSword;
 
-@Getter
 @Setter
 public class BasicSwordItem extends ItemSword
 {
@@ -21,7 +19,6 @@ public class BasicSwordItem extends ItemSword
     private float attackModifier;
     /* Base Minecraft value*/
     private double weaponSpeed = -2.4000000953674316D;
-    @Getter(AccessLevel.NONE)
     private boolean hasTypes;
     @Setter(AccessLevel.NONE)
     private WeaponType type;
@@ -79,5 +76,20 @@ public class BasicSwordItem extends ItemSword
         }
 
         return multimap;
+    }
+
+    public float getAttackModifier()
+    {
+        return this.attackModifier;
+    }
+
+    public double getWeaponSpeed()
+    {
+        return this.weaponSpeed;
+    }
+
+    public WeaponType getType()
+    {
+        return this.type;
     }
 }

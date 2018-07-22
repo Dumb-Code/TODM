@@ -1,4 +1,4 @@
-package net.dumbcode.todm.server.creatures.dragon;
+package net.dumbcode.todm.server.creatures.animal.dragon;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,17 +1,27 @@
 package net.dumbcode.todm.client.render;
 
+import net.dumbcode.dumblibrary.client.animation.ModelContainer;
+import net.dumbcode.dumblibrary.client.animation.objects.AnimationPass;
 import net.dumbcode.todm.TODM;
+import net.dumbcode.todm.client.render.animals.AnimalAnimations;
+import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.entities.EntityHandler;
+import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.dumbcode.todm.server.items.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod.EventBusSubscriber
+import java.util.Locale;
+
+@Mod.EventBusSubscriber(modid = TODM.MODID)
 @SideOnly(Side.CLIENT)
 public class RenderHandler
 {
@@ -32,6 +42,25 @@ public class RenderHandler
     @SubscribeEvent
     public static void onModelEvent(ModelRegistryEvent event)
     {
+        for (Animal animal : EntityHandler.ANIMAL_REGISTRY.getValuesCollection())
+        {
+            animal.setModelContainer(new ModelContainer(animal.getRegName(),
+                    animal.getModelProperties().getModelGrowthStages(), animal.getModelProperties().getMainModelMap(),
+                    AnimalAnimations.getNames(), animal.getModelProperties().getEntityAnimatorSupplier(),
+                    AnimalAnimations::fromName, AnimalAnimations.IDLE.get(),
+                    AnimalAnimations::getAnimation, AnimationPass::new));
+        }
         init();
+        registerEntityHandler();
+    }
+
+    private static void registerEntityHandler()
+    {
+        RenderingRegistry.registerEntityRenderingHandler(AnimalEntity.class, manager -> new AnimalRenderer(manager, entity -> entity.getAnimal().getModelContainer(),
+                entity ->
+                {
+                    ResourceLocation regname = entity.getAnimal().getRegName();
+                    return new ResourceLocation(regname.getResourceDomain(), "textures/entities/" + regname.getResourcePath() + "/" + (entity.isMale() ? "male" : "female") + "_" + entity.getGrowthStage().name().toLowerCase(Locale.ROOT) + ".png");
+                }));
     }
 }

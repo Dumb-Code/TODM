@@ -1,6 +1,7 @@
 package net.dumbcode.todm.server.creatures.animal;
 
 import net.dumbcode.dumblibrary.server.entity.GrowthStage;
+import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.creatures.attributes.Diet;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.init.Biomes;
@@ -12,7 +13,6 @@ public class TestAnimal extends Animal
     public TestAnimal(String name)
     {
         this.setName(name);
-        this.setMale(true);
         this.setMarineAnimal(false);
         this.setEntityClass(AnimalEntity.class);
         this.setFullAmount(2000);
@@ -25,6 +25,6 @@ public class TestAnimal extends Animal
         this.setScaleInfant(.1f);
         this.setGrowthStage(GrowthStage.ADULT);
         this.setDiet(Diet.HERBIVOR);
-        this.setRegistryName("animal");
+        this.setRegistryName(TODM.MODID, "test");
     }
 }
