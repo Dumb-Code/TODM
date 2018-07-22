@@ -1,6 +1,4 @@
 {
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "todm:items/longsword_gold"
-  }
+  "default_model": "todm:item/longsword_gold_inv",
+  "gui": "todm:item/longsword_gold_gui"
 }

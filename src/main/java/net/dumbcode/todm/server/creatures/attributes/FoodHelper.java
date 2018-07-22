@@ -2,6 +2,8 @@ package net.dumbcode.todm.server.creatures.attributes;
 
 import com.google.common.collect.Maps;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -101,7 +103,8 @@ public enum FoodHelper
                 .collect(Collectors.toList());
     }
 
-    @Data
+    @Getter
+    @Setter
     public static class FoodNutrient
     {
 
