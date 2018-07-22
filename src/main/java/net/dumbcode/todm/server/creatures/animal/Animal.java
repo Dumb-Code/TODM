@@ -26,9 +26,9 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
     private int secondaryEggColorMale, secondaryEggColorFemale;
     private int maximumAge;
     private int spawnChance;
-    private int fullAmount;
-    private int hungryAmount;
-    private int starvingAmount;
+    private int fullAmount, hydratedAmount;
+    private int hungryAmount, thirstyAmount;
+    private int starvingAmount, dehydratedAmount;
     private double babyHealth, adultHealth;
     private double babyStrength, adultStrength;
     private double babySpeed, adultSpeed;

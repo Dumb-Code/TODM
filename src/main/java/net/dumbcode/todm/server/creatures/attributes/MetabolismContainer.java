@@ -4,74 +4,123 @@ import lombok.Getter;
 import lombok.Setter;
 import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
+import net.minecraft.nbt.NBTTagCompound;
 
 @Getter
 @Setter
 public class MetabolismContainer
 {
 
-    private int currentMetabolism;
-    private int maxMetabolism;
-    private int decreaseRate;
-    private boolean starving;
-    private boolean hungry;
-    private boolean full;
+    private int currentFood;
+    private int currentWater;
+    private int maxFood, maxWater;
+    private int decreaseFoodRate, decreaseWaterRate;
+    private boolean starving, dehydrated;
+    private boolean hungry, thirsty;
+    private boolean full, hydrated;
     private Animal animal;
 
     public MetabolismContainer(Animal animal)
     {
         this.animal = animal;
-        this.maxMetabolism = animal.getFullAmount();
-        this.currentMetabolism = maxMetabolism;
+        this.maxFood = animal.getFullAmount();
+        this.maxWater = animal.getHydratedAmount();
+        this.currentFood = maxFood;
+        this.currentWater = maxWater;
         this.full = true;
+        this.hydrated = true;
     }
 
     public void update(AnimalEntity entity)
     {
         if (entity.ticksExisted % 20 == 0)
         {
-            getAnimalFoodLevel();
-            if ((currentMetabolism = -decreaseRate) > 0)
+            if ((currentFood = -decreaseFoodRate) > 0)
             {
-                currentMetabolism = -decreaseRate;
+                currentFood = -decreaseFoodRate;
             } else
             {
-                currentMetabolism = 0;
+                currentFood = 0;
             }
+            if ((currentWater = -decreaseWaterRate) > 0)
+            {
+                currentWater = -decreaseWaterRate;
+            } else
+            {
+                currentWater = 0;
+            }
+            getAnimalFoodLevel();
+            getAnimalThirstLevel();
         }
     }
 
     public void getAnimalFoodLevel()
     {
-        if (currentMetabolism == animal.getFullAmount())
+        if (currentFood == animal.getFullAmount())
         {
             setFull(true);
-        } else if (currentMetabolism <= animal.getHungryAmount())
+        } else if (currentFood <= animal.getHungryAmount())
         {
             setHungry(true);
-        } else if (currentMetabolism <= animal.getStarvingAmount())
+        } else if (currentFood <= animal.getStarvingAmount())
         {
             setStarving(true);
-        } else
+        }
+    }
+
+    public void getAnimalThirstLevel()
+    {
+        if (currentWater == animal.getHydratedAmount())
         {
-            setStarving(false);
-            setHungry(false);
-            setFull(false);
+            setHydrated(true);
+        } else if (currentWater <= animal.getThirstyAmount())
+        {
+            setThirsty(true);
+        } else if (currentWater <= animal.getDehydratedAmount())
+        {
+            setDehydrated(true);
         }
     }
 
     public boolean doesAnimalNeedFood()
     {
-        return !isStarving() && !isHungry();
+        return isStarving() || isHungry();
+    }
+
+    public boolean doesAnimalNeedWater()
+    {
+        return isThirsty() || isDehydrated();
     }
 
     public void eat(int calories)
     {
-        if ((currentMetabolism += calories) >= animal.getFullAmount())
+        if ((currentFood += calories) >= animal.getFullAmount())
         {
-            currentMetabolism = animal.getFullAmount();
+            currentFood = animal.getFullAmount();
             return;
         }
-        currentMetabolism += calories;
+        currentFood += calories;
+    }
+
+    public void drink(int water)
+    {
+        if ((currentWater += water) >= animal.getHydratedAmount())
+        {
+            currentWater = animal.getHydratedAmount();
+            return;
+        }
+        currentFood += water;
+    }
+
+    public void readFromNBT(NBTTagCompound nbt)
+    {
+        this.currentWater = nbt.getInteger("currentWater");
+        this.currentFood = nbt.getInteger("currentFood");
+    }
+
+    public void writeToNBT(NBTTagCompound nbt)
+    {
+        nbt.setInteger("currentWater", this.currentWater);
+        nbt.setInteger("currentFood", this.currentFood);
     }
 }

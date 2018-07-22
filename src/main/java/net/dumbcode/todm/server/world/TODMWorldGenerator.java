@@ -17,7 +17,7 @@ public class TODMWorldGenerator implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        if (random.nextFloat() < .05F && TODMConfig.STRUCTURE_GENERATION.settlementgeneration)
+        if (random.nextFloat() < .05F && TODMConfig.STRUCTURE_GENERATION.settlementGeneration)
         {
             settlementStructure.generate(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
         }

@@ -11,6 +11,7 @@ import net.dumbcode.todm.server.entities.EntityHandler;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
@@ -24,6 +25,8 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     private EntityAITasks tasks;
     private boolean isCarcass = false;
     private boolean isMale;
+    private int age;
+    private GrowthStage growthStage;
 
     public AnimalEntity(World world)
     {
@@ -32,6 +35,9 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         this.tasks = new EntityAITasks(world.profiler);
         this.metabolism = new MetabolismContainer(animal);
         this.initMetabolism();
+        this.age = 0;
+        this.growthStage = GrowthStage.INFANT;
+        this.isMale = this.rand.nextFloat() > .5F;
     }
 
     @Override
@@ -40,24 +46,40 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         super.onUpdate();
         if (!this.world.isRemote)
         {
+            if (this.ticksExisted % 24000 == 0)
+            {
+                age++;
+                growthStage = getAppropriateStage();
+                if (age == animal.getMaximumAge())
+                {
+                    this.setDead();
+                }
+            }
             metabolism.update(this);
         }
     }
 
     public void initMetabolism()
     {
-        metabolism.setDecreaseRate(2);
+        metabolism.setDecreaseFoodRate(2);
+        metabolism.setDecreaseWaterRate(3);
     }
 
-    @Override
-    public void writeSpawnData(ByteBuf buffer)
+    public GrowthStage getAppropriateStage()
     {
-    }
-
-    @Override
-    public void readSpawnData(ByteBuf additionalData)
-    {
-
+        if (animal.getMaximumAge() / age <= animal.getMaximumAge() / 4)
+        {
+            return GrowthStage.INFANT;
+        } else if (animal.getMaximumAge() / age <= animal.getMaximumAge() / 3)
+        {
+            return GrowthStage.JUVENILE;
+        } else if (animal.getMaximumAge() / age <= animal.getMaximumAge() / 2)
+        {
+            return GrowthStage.ADOLESCENT;
+        } else
+        {
+            return GrowthStage.ADULT;
+        }
     }
 
     @Override
@@ -94,5 +116,39 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     public Animation[] getAnimations()
     {
         return new Animation[0];
+    }
+
+    @Override
+    public void writeSpawnData(ByteBuf buffer)
+    {
+    }
+
+    @Override
+    public void readSpawnData(ByteBuf additionalData)
+    {
+
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound)
+    {
+        compound = super.writeToNBT(compound);
+        compound.setInteger("age", this.age);
+        compound.setBoolean("isCarcass", this.isCarcass);
+        compound.setBoolean("isMale", this.isMale);
+        compound.setString("growthStage", this.growthStage.name());
+        this.getMetabolism().writeToNBT(compound);
+        return compound;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound)
+    {
+        super.readFromNBT(compound);
+        this.setAge(compound.getInteger("age"));
+        this.setCarcass(compound.getBoolean("isCarcass"));
+        this.setMale(compound.getBoolean("isMale"));
+        this.setGrowthStage(GrowthStage.valueOf(compound.getString("growthStage")));
+        this.getMetabolism().readFromNBT(compound);
     }
 }

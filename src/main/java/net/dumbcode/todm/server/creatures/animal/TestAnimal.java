@@ -18,7 +18,7 @@ public class TestAnimal extends Animal
         this.setFullAmount(2000);
         this.setHungryAmount(1300);
         this.setStarvingAmount(500);
-        this.setMaximumAge(5);
+        this.setMaximumAge(100);
         this.setSpawnChance(4);
         this.setSpawnBiomes(new Biome[]{Biomes.DESERT});
         this.setScaleAdult(.4f);
