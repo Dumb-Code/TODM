@@ -1,0 +1,70 @@
+{
+  "name": "test",
+  "marine_animal": false,
+  "entity_class": "net.dumbcode.todm.server.entities.animals.AnimalEntity",
+  "spawn_egg": {
+    "male": [
+      "0x87987f",
+      "0x607343"
+    ],
+    "female": [
+      "0x87987f",
+      "0x607343"
+    ]
+  },
+  "properties": {
+    "growth_stages": [
+      "infant",
+      "adult"
+    ],
+    "size": {
+      "scale": {
+        "adult": 0.0,
+        "baby": 0.0
+      },
+      "size_x": {
+        "adult": 0.0,
+        "baby": 0.0
+      },
+      "size_y": {
+        "adult": 0.0,
+        "baby": 0.0
+      },
+      "eye_height": {
+        "adult": 0.0,
+        "baby": 0.0
+      }
+    }
+  },
+  "traits": {
+    "max_age": 100,
+    "spawn_chance": 5,
+    "biomes": [
+      "forest"
+    ],
+    "strength": {
+      "adult": 0.0,
+      "baby": 0.0
+    },
+    "health": {
+      "adult": 0,
+      "baby": 0
+    }
+  },
+  "diet": {
+    "diet": 0,
+    "custom_diet": [
+      ""
+    ],
+    "food_amount": [
+      0,
+      0,
+      0
+    ],
+    "hydrated_amount": [
+      0,
+      0,
+      0
+    ]
+  }
+}

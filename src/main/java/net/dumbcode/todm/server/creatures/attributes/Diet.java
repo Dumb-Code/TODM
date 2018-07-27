@@ -9,10 +9,16 @@ public enum Diet
 {
     CARNIVOR(FoodHelper.getItemsForDiet(FoodHelper.FoodType.MEAT), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.MEAT)),
     HERBIVOR(FoodHelper.getItemsForDiet(FoodHelper.FoodType.PLANT), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.PLANT)),
-    PISCIVORE(FoodHelper.getItemsForDiet(FoodHelper.FoodType.FISH), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.PLANT));
+    PISCIVORE(FoodHelper.getItemsForDiet(FoodHelper.FoodType.FISH), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.PLANT)),
+    CUSTOM();
 
     private List<Item> items;
     private List<Block> blocks;
+
+    Diet()
+    {
+
+    }
 
     Diet(List<Item> items, List<Block> blocks)
     {

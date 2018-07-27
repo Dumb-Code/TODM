@@ -3,19 +3,19 @@ package net.dumbcode.todm.server.creatures.animal;
 import lombok.Getter;
 import lombok.Setter;
 import net.dumbcode.dumblibrary.client.animation.ModelContainer;
-import net.dumbcode.dumblibrary.server.entity.GrowthStage;
 import net.dumbcode.todm.server.creatures.attributes.Diet;
 import net.dumbcode.todm.server.creatures.attributes.data.ModelProperties;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.World;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
 @Setter
 @Getter
-public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
+public class Animal extends IForgeRegistryEntry.Impl<Animal>
 {
 
     private Class<? extends AnimalEntity> entityClass;
@@ -32,15 +32,13 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
     private double babyHealth, adultHealth;
     private double babyStrength, adultStrength;
     private double babySpeed, adultSpeed;
-    private float babySizeX, adultSizeX;
-    private float babySizeY, adultSizeY;
-    private float babyEyeHeight, adultEyeHeight;
-    private float scaleInfant;
-    private float scaleAdult;
+    private double babySizeX, adultSizeX;
+    private double babySizeY, adultSizeY;
+    private double babyEyeHeight, adultEyeHeight;
+    private double babyScale, adultScale;
     private Diet diet;
-    private GrowthStage growthStage;
     private ModelContainer modelContainer;
-    private Biome[] spawnBiomes;
+    private BiomeDictionary.Type[] spawnBiomes;
     private ModelProperties modelProperties = new ModelProperties();
     public static Animal MISSING = null;
 
@@ -52,5 +50,10 @@ public abstract class Animal extends IForgeRegistryEntry.Impl<Animal>
             throw new RuntimeException("Null Registry Name Found");
         }
         return this.getRegistryName();
+    }
+
+    public AnimalEntity createEntity(World world)
+    {
+        return new AnimalEntity(world, this);
     }
 }

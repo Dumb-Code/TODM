@@ -18,7 +18,7 @@ public class ServerEventHandler
     {
         EntityHandler.ANIMAL_REGISTRY = new RegistryBuilder<Animal>()
                 .setType(Animal.class)
-                .setName(new ResourceLocation(TODM.MODID, "animal"))
+                .setName(new ResourceLocation(TODM.MODID, "creature"))
                 .setDefaultKey(new ResourceLocation(TODM.MODID, "test"))
                 .set(((key, isNetwork) -> Animal.MISSING))
                 .create();

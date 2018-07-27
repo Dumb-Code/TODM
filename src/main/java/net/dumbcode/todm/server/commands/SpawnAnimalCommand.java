@@ -7,6 +7,7 @@ import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nullable;
@@ -25,13 +26,14 @@ public class SpawnAnimalCommand extends CommandBase
     @Override
     public String getUsage(ICommandSender sender)
     {
-        return "this needs to be done";
+        return "spawn <register id>";
     }
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args)
     {
-        AnimalEntity entity = new AnimalEntity(sender.getEntityWorld());
+        Animal animal = EntityHandler.ANIMAL_REGISTRY.getValue(new ResourceLocation(args[0]));
+        AnimalEntity entity = animal.createEntity(sender.getEntityWorld());
         entity.setPosition(sender.getPositionVector().x, sender.getPositionVector().y, sender.getPositionVector().z);
         sender.getEntityWorld().spawnEntity(entity);
     }

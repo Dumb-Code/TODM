@@ -29,15 +29,9 @@ public class EntityHandler
         event.getRegistry().register(EntityEntryBuilder.create()
                 .entity(AnimalEntity.class)
                 .factory(AnimalEntity::new)
-                .name(TODM.MODID + ".animal")
+                .name(TODM.MODID + ".creature")
                 .tracker(64, 1, true)
-                .id(new ResourceLocation(TODM.MODID, "animal"), 0)
+                .id(new ResourceLocation(TODM.MODID, "creature"), 0)
                 .build());
-    }
-
-    @SubscribeEvent
-    public static void registerAnimals(RegistryEvent.Register<Animal> event)
-    {
-        event.getRegistry().register(test);
     }
 }

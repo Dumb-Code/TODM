@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import net.dumbcode.dumblibrary.server.entity.EntityAnimatable;
 import net.dumbcode.dumblibrary.server.entity.GrowthStage;
+import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
 import net.dumbcode.todm.server.entities.EntityHandler;
@@ -12,6 +13,7 @@ import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
@@ -20,7 +22,7 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpawnData, EntityAnimatable
 {
 
-    private Animal animal;
+    private Animal animal = Animal.MISSING;
     private MetabolismContainer metabolism;
     private EntityAITasks tasks;
     private boolean isCarcass = false;
@@ -31,13 +33,22 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     public AnimalEntity(World world)
     {
         super(world);
-        this.animal = EntityHandler.test;
+        if (animal == Animal.MISSING)
+        {
+            this.animal = EntityHandler.ANIMAL_REGISTRY.getValue(new ResourceLocation(TODM.MODID, "test"));
+        }
         this.tasks = new EntityAITasks(world.profiler);
         this.metabolism = new MetabolismContainer(animal);
         this.initMetabolism();
         this.age = 0;
         this.growthStage = GrowthStage.INFANT;
         this.isMale = this.rand.nextFloat() > .5F;
+    }
+
+    public AnimalEntity(World world, Animal animal)
+    {
+        this(world);
+        this.animal = animal;
     }
 
     @Override
@@ -81,6 +92,7 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
             return GrowthStage.ADULT;
         }
     }
+
 
     @Override
     public GrowthStage getGrowthStage()
