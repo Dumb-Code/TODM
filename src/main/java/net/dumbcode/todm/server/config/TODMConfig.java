@@ -15,16 +15,18 @@ public class TODMConfig
     @Config.Name("Structure Generation")
     public static final StructureGeneration STRUCTURE_GENERATION = new StructureGeneration();
 
-    public static class StructureGeneration {
-        @Config.Name("Settlement Generation")
-        public boolean settlementGeneration = true;
-    }
-
     @SubscribeEvent
-    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if(TODM.MODID.equals(event.getModID()))
+    public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (TODM.MODID.equals(event.getModID()))
         {
             ConfigManager.sync(TODM.MODID, Config.Type.INSTANCE);
         }
+    }
+
+    public static class StructureGeneration
+    {
+        @Config.Name("Settlement Generation")
+        public boolean settlementGeneration = true;
     }
 }

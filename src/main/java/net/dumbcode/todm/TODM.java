@@ -1,5 +1,6 @@
 package net.dumbcode.todm;
 
+import net.dumbcode.dumblibrary.server.json.JsonUtil;
 import net.dumbcode.todm.server.ServerProxy;
 import net.dumbcode.todm.server.commands.TODMCommand;
 import net.minecraftforge.fml.common.Mod;
@@ -16,10 +17,10 @@ public class TODM
 
     public static final String MODID = "todm";
     public static final String NAME = "That One Dragon Mod";
-    public static final String VERSION = "0.0.1";
+    public static final String VERSION = "0.0.2";
 
     public static final String LLIB_VERSION = "1.7.9";
-    public static final String DC_LIB = "0.0.2";
+    public static final String DC_LIB = "0.1.2";
 
     @Mod.Instance
     public static TODM instance;
@@ -32,6 +33,7 @@ public class TODM
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        JsonUtil.makeSubDirectories(MODID, "animals");
         logger = event.getModLog();
         proxy.preInit(event);
         System.out.println(NAME + " is Loading!");
@@ -49,14 +51,15 @@ public class TODM
         proxy.postInit(event);
     }
 
-    public static Logger getLogger()
-    {
-        return logger;
-    }
-
     @Mod.EventHandler
     public void onServerStart(FMLServerStartingEvent event)
     {
         event.registerServerCommand(new TODMCommand());
     }
+
+    public static Logger getLogger()
+    {
+        return logger;
+    }
+
 }

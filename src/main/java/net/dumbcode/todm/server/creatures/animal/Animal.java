@@ -18,8 +18,8 @@ import javax.annotation.Nonnull;
 public class Animal extends IForgeRegistryEntry.Impl<Animal>
 {
 
+    public static Animal MISSING = null;
     private Class<? extends AnimalEntity> entityClass;
-
     private String name;
     private boolean isMarineAnimal;
     private int primaryEggColorMale, primaryEggColorFemale;
@@ -40,7 +40,6 @@ public class Animal extends IForgeRegistryEntry.Impl<Animal>
     private ModelContainer modelContainer;
     private BiomeDictionary.Type[] spawnBiomes;
     private ModelProperties modelProperties = new ModelProperties();
-    public static Animal MISSING = null;
 
     @Nonnull
     public ResourceLocation getRegName()

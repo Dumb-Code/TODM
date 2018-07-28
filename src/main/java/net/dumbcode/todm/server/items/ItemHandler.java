@@ -3,7 +3,6 @@ package net.dumbcode.todm.server.items;
 import com.google.common.collect.Lists;
 import net.dumbcode.todm.server.items.weapons.CrossbowItem;
 import net.dumbcode.todm.server.items.weapons.WeaponType;
-import net.dumbcode.todm.server.items.weapons.swords.BasicSwordItem;
 import net.dumbcode.todm.server.items.weapons.swords.LongSwordItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;

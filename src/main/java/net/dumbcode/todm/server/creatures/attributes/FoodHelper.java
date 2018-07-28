@@ -1,7 +1,6 @@
 package net.dumbcode.todm.server.creatures.attributes;
 
 import com.google.common.collect.Maps;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import net.dumbcode.todm.server.creatures.animal.Animal;
@@ -20,6 +19,32 @@ public enum FoodHelper
 
     private static final Map<Item, FoodNutrient> food = Maps.newHashMap();
     private static final Map<Block, FoodNutrient> foodBlocks = Maps.newHashMap();
+
+    public static void registerItem(Item item, FoodType type, int calories)
+    {
+        food.put(item, new FoodNutrient(type, calories));
+    }
+
+    public static void registerBlock(Block block, FoodType type, int calories)
+    {
+        foodBlocks.put(block, new FoodNutrient(type, calories));
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Item> getItemsForDiet(FoodHelper.FoodType type)
+    {
+        return (List) FoodHelper.INSTANCE.getFood().entrySet().stream()
+                .filter(s -> s.getKey().equals(type))
+                .collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("unchecked")
+    public static List<Block> getBlocksForDiet(FoodHelper.FoodType type)
+    {
+        return (List) FoodHelper.INSTANCE.getFoodBlocks().entrySet().stream()
+                .filter(s -> s.getKey().equals(type))
+                .collect(Collectors.toList());
+    }
 
     public void registerFoodItems()
     {
@@ -52,16 +77,6 @@ public enum FoodHelper
         registerBlock(Blocks.RED_FLOWER, FoodType.PLANT, 100);
     }
 
-    public static void registerItem(Item item, FoodType type, int calories)
-    {
-        food.put(item, new FoodNutrient(type, calories));
-    }
-
-    public static void registerBlock(Block block, FoodType type, int calories)
-    {
-        foodBlocks.put(block, new FoodNutrient(type, calories));
-    }
-
     public boolean isEdible(Item item, Animal animal)
     {
         return animal.getDiet().getItems().contains(item);
@@ -87,20 +102,9 @@ public enum FoodHelper
         return foodBlocks;
     }
 
-    @SuppressWarnings("unchecked")
-    public static List<Item> getItemsForDiet(FoodHelper.FoodType type)
+    public enum FoodType
     {
-        return (List) FoodHelper.INSTANCE.getFood().entrySet().stream()
-                .filter(s -> s.getKey().equals(type))
-                .collect(Collectors.toList());
-    }
-
-    @SuppressWarnings("unchecked")
-    public static List<Block> getBlocksForDiet(FoodHelper.FoodType type)
-    {
-        return (List) FoodHelper.INSTANCE.getFoodBlocks().entrySet().stream()
-                .filter(s -> s.getKey().equals(type))
-                .collect(Collectors.toList());
+        MEAT, FISH, PLANT, INSECT
     }
 
     @Getter
@@ -116,10 +120,5 @@ public enum FoodHelper
             this.calories = calories;
             this.type = type;
         }
-    }
-
-    public enum FoodType
-    {
-        MEAT, FISH, PLANT, INSECT
     }
 }

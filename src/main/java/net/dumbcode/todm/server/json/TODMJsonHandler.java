@@ -1,6 +1,7 @@
 package net.dumbcode.todm.server.json;
 
 import com.google.gson.*;
+import net.dumbcode.dumblibrary.server.json.JsonUtil;
 import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.dumbcode.todm.server.entities.EntityHandler;
@@ -29,7 +30,8 @@ public class TODMJsonHandler
     public static void onAnimalRegistry(RegistryEvent.Register<Animal> event)
     {
         event.getRegistry().register(EntityHandler.test);
-        JsonUtil.getAllRegister(event.getRegistry(), GSON, "animals");
+        JsonUtil.registerModJsons(event.getRegistry(), GSON, TODM.MODID, "animals");
+        JsonUtil.registerLocalJsons(event.getRegistry(), GSON, TODM.MODID, "animals");
     }
 
     public static class JsonHandler implements JsonDeserializer<Animal>

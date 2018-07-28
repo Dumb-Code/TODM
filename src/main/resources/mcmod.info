@@ -1,12 +1,14 @@
 [
-    {
-        "modid": "todm",
-        "name": "That One Dragon Mod",
-        "version": "0.0.1",
-        "mcversion": "1.12.2",
-        "authorList": ["DumbCode"],
-        "dependencies": [],
-        "url": "http://www.dumbcode.net",
-        "description": "Dragons in Minecraft!"
-    }
+  {
+    "modid": "todm",
+    "name": "That One Dragon Mod",
+    "version": "0.0.1",
+    "mcversion": "1.12.2",
+    "authorList": [
+      "DumbCode"
+    ],
+    "dependencies": [],
+    "url": "http://www.dumbcode.net",
+    "description": "Dragons in Minecraft!"
+  }
 ]

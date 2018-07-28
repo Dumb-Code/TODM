@@ -2,7 +2,6 @@ package net.dumbcode.todm.client.render;
 
 import net.dumbcode.dumblibrary.client.animation.ModelContainer;
 import net.dumbcode.dumblibrary.client.animation.objects.AnimationPass;
-import net.dumbcode.dumblibrary.client.model.TransformTypeModelLoader;
 import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.client.render.animals.AnimalAnimations;
 import net.dumbcode.todm.server.creatures.animal.Animal;
@@ -34,7 +33,7 @@ public class RenderHandler
         registerItemRenderer(ItemHandler.LONGSWORD_GOLD, "longsword_gold.ttm");
         registerItemRenderer(ItemHandler.LONGSWORD_IRON, "longsword_iron.ttm");
         registerItemRenderer(ItemHandler.LONGSWORD_SCORCHING, "longsword_scorching.ttm");
-}
+    }
 
     private static void registerItemRenderer(Item item, String id)
     {

@@ -56,14 +56,6 @@ public class BasicSwordItem extends ItemSword
         return hasTypes;
     }
 
-    public void setType(WeaponType type)
-    {
-        if (this.hasTypes)
-        {
-            this.type = type;
-        }
-    }
-
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
     {
@@ -91,5 +83,13 @@ public class BasicSwordItem extends ItemSword
     public WeaponType getType()
     {
         return this.type;
+    }
+
+    public void setType(WeaponType type)
+    {
+        if (this.hasTypes)
+        {
+            this.type = type;
+        }
     }
 }

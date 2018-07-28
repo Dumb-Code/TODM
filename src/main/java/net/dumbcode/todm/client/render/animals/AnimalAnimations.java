@@ -27,21 +27,6 @@ public enum AnimalAnimations implements AnimationInfo
         this.useInertia = useInertia;
     }
 
-    public boolean shouldHold()
-    {
-        return this.hold;
-    }
-
-    public boolean doesBlockMovement()
-    {
-        return this.doesBlockMovement;
-    }
-
-    public boolean useInertia()
-    {
-        return this.useInertia;
-    }
-
     public static Collection<String> getNames()
     {
         List<String> list = Lists.newArrayList();
@@ -76,6 +61,21 @@ public enum AnimalAnimations implements AnimationInfo
             }
         }
         return animation.get();
+    }
+
+    public boolean shouldHold()
+    {
+        return this.hold;
+    }
+
+    public boolean doesBlockMovement()
+    {
+        return this.doesBlockMovement;
+    }
+
+    public boolean useInertia()
+    {
+        return this.useInertia;
     }
 
     public Animation get()
