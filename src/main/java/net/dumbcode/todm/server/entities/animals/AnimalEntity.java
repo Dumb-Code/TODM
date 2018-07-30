@@ -33,10 +33,7 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     public AnimalEntity(World world)
     {
         super(world);
-        if (animal == Animal.MISSING)
-        {
-            this.animal = EntityHandler.ANIMAL_REGISTRY.getValue(new ResourceLocation(TODM.MODID, "test"));
-        }
+        this.setAnimal();
         this.tasks = new EntityAITasks(world.profiler);
         this.metabolism = new MetabolismContainer(animal);
         this.initMetabolism();
@@ -93,11 +90,18 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         }
     }
 
+    private void setAnimal()
+    {
+        if (animal == Animal.MISSING)
+        {
+            this.animal = EntityHandler.ANIMAL_REGISTRY.getValue(new ResourceLocation(TODM.MODID, "missing"));
+        }
+    }
 
     @Override
     public GrowthStage getGrowthStage()
     {
-        return GrowthStage.ADULT;
+        return growthStage;
     }
 
     @Override

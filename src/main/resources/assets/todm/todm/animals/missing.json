@@ -17,6 +17,10 @@
       "infant",
       "adult"
     ],
+    "overlays": [
+      "eyes",
+      "eye_lids"
+    ],
     "size": {
       "scale": {
         "adult": 0.0,

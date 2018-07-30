@@ -1,5 +1,6 @@
 package net.dumbcode.todm.server.json.data.creature;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import net.dumbcode.dumblibrary.client.animation.objects.EntityAnimator;
 import net.dumbcode.dumblibrary.server.entity.GrowthStage;
@@ -59,6 +60,6 @@ public class JsonAnimal extends Animal
         this.getModelProperties().setModelGrowthStages(growth.getGrowthStages());
         this.getModelProperties().setEntityAnimatorSupplier(EntityAnimator::new);
         this.getModelProperties().setMainModelMap(Maps.newEnumMap(GrowthStage.class));
-        this.getModelProperties().setOverlays(Maps.newHashMap());
+        this.getModelProperties().setOverlays(Lists.newArrayList(growth.getOverlays()));
     }
 }

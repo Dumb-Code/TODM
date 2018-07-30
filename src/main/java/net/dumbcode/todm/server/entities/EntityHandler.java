@@ -2,7 +2,6 @@ package net.dumbcode.todm.server.entities;
 
 import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.creatures.animal.Animal;
-import net.dumbcode.todm.server.creatures.animal.TestAnimal;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -17,9 +16,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 @GameRegistry.ObjectHolder(TODM.MODID)
 public class EntityHandler
 {
-
-    public static Animal test = new TestAnimal("test");
-
     public static IForgeRegistry<Animal> ANIMAL_REGISTRY;
 
     //Test Entity

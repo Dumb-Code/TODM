@@ -6,7 +6,6 @@ import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.client.render.animals.AnimalAnimations;
 import net.dumbcode.todm.server.creatures.animal.Animal;
 import net.dumbcode.todm.server.entities.EntityHandler;
-import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.dumbcode.todm.server.items.ItemHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -57,11 +56,14 @@ public class RenderHandler
 
     private static void registerEntityHandler()
     {
-        RenderingRegistry.registerEntityRenderingHandler(AnimalEntity.class, manager -> new AnimalRenderer(manager, entity -> entity.getAnimal().getModelContainer(),
-                entity ->
-                {
-                    ResourceLocation regname = entity.getAnimal().getRegName();
-                    return new ResourceLocation(regname.getResourceDomain(), "textures/entities/" + regname.getResourcePath() + "/" + (entity.isMale() ? "male" : "female") + "_" + entity.getGrowthStage().name().toLowerCase(Locale.ROOT) + ".png");
-                }));
+        for (Animal animal : EntityHandler.ANIMAL_REGISTRY.getValuesCollection())
+        {
+            RenderingRegistry.registerEntityRenderingHandler(animal.getEntityClass(), manager -> new AnimalRenderer(manager, animal, entity -> animal.getModelContainer(),
+                    entity ->
+                    {
+                        ResourceLocation regname = animal.getRegName();
+                        return new ResourceLocation(regname.getResourceDomain(), "textures/entities/" + regname.getResourcePath() + "/" + (entity.isMale() ? "male" : "female") + "_" + entity.getGrowthStage().name().toLowerCase(Locale.ROOT) + ".png");
+                    }));
+        }
     }
 }

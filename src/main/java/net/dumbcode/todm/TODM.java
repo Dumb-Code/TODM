@@ -33,9 +33,9 @@ public class TODM
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        JsonUtil.makeSubDirectories(MODID, "animals");
         logger = event.getModLog();
         proxy.preInit(event);
+        JsonUtil.makeSubDirectories(MODID, "animals");
         System.out.println(NAME + " is Loading!");
     }
 

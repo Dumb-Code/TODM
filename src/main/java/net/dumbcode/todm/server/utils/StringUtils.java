@@ -1,8 +1,11 @@
 package net.dumbcode.todm.server.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Locale;
 
-public class Utils
+@UtilityClass
+public class StringUtils
 {
     public static String formatString(String string)
     {

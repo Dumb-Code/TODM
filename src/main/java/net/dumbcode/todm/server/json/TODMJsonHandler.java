@@ -4,10 +4,9 @@ import com.google.gson.*;
 import net.dumbcode.dumblibrary.server.json.JsonUtil;
 import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.creatures.animal.Animal;
-import net.dumbcode.todm.server.entities.EntityHandler;
+import net.dumbcode.todm.server.event.RegisterAnimalEvent;
 import net.dumbcode.todm.server.json.data.creature.JsonAnimal;
 import net.dumbcode.todm.server.json.data.creature.attributes.*;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -27,9 +26,8 @@ public class TODMJsonHandler
     private static final Gson GSON = BUILDER.create();
 
     @SubscribeEvent
-    public static void onAnimalRegistry(RegistryEvent.Register<Animal> event)
+    public static void onAnimalRegistry(RegisterAnimalEvent event)
     {
-        event.getRegistry().register(EntityHandler.test);
         JsonUtil.registerModJsons(event.getRegistry(), GSON, TODM.MODID, "animals");
         JsonUtil.registerLocalJsons(event.getRegistry(), GSON, TODM.MODID, "animals");
     }
