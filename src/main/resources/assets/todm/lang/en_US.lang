@@ -13,3 +13,7 @@ item.longsword_iron.name=Iron Longsword
 itemGroup.todm.items=Items
 itemGroup.todm.blocks=Blocks
 itemGroup.todm.weapons=Weapons
+
+#Dimension
+generator.todm.info=World for That One Dragon Mod
+generator.todm=TODM

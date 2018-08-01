@@ -1,7 +1,7 @@
-package net.dumbcode.todm.server.world;
+package net.dumbcode.todm.server.world.old;
 
 import net.dumbcode.todm.server.config.TODMConfig;
-import net.dumbcode.todm.server.world.structures.SettlementStructure;
+import net.dumbcode.todm.server.world.old.structures.SettlementStructure;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
