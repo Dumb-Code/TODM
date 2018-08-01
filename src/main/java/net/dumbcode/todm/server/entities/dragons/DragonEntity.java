@@ -3,7 +3,7 @@ package net.dumbcode.todm.server.entities.dragons;
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
 import lombok.Setter;
-import net.dumbcode.todm.server.creatures.animal.dragon.Dragon;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
@@ -13,18 +13,17 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 public class DragonEntity extends AnimalEntity implements IEntityAdditionalSpawnData
 {
 
-    private Dragon dragon;
+    private Animal dragon;
 
-    public DragonEntity(World worldIn, Dragon dragon)
+    public DragonEntity(World worldIn, Animal dragon)
     {
         super(worldIn);
         this.dragon = dragon;
     }
 
-    public DragonEntity(World worldIn)
+    public DragonEntity(World world)
     {
-        //TODO: Set a default dragon
-        this(worldIn, null);
+        super(world);
         this.enablePersistence();
     }
 

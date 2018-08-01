@@ -1,4 +1,4 @@
-package net.dumbcode.todm.client.render.animals;
+package net.dumbcode.todm.client.render.animal;
 
 import com.google.common.collect.Lists;
 import net.dumbcode.dumblibrary.client.animation.AnimationInfo;

@@ -2,8 +2,8 @@ package net.dumbcode.todm.client.render;
 
 import net.dumbcode.dumblibrary.client.animation.AnimatableRenderer;
 import net.dumbcode.dumblibrary.client.animation.ModelContainer;
-import net.dumbcode.todm.client.render.animals.Overlay;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.client.render.animal.Overlay;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

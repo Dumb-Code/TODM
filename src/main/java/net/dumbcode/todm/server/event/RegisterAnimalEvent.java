@@ -1,7 +1,7 @@
 package net.dumbcode.todm.server.event;
 
 import lombok.Getter;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.registries.IForgeRegistry;
 

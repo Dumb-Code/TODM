@@ -3,7 +3,7 @@ package net.dumbcode.todm.server.creatures.attributes;
 import com.google.common.collect.Maps;
 import lombok.Getter;
 import lombok.Setter;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

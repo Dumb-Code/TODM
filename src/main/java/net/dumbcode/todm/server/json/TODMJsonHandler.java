@@ -3,7 +3,7 @@ package net.dumbcode.todm.server.json;
 import com.google.gson.*;
 import net.dumbcode.dumblibrary.server.json.JsonUtil;
 import net.dumbcode.todm.TODM;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.event.RegisterAnimalEvent;
 import net.dumbcode.todm.server.json.data.creature.JsonAnimal;
 import net.dumbcode.todm.server.json.data.creature.attributes.*;

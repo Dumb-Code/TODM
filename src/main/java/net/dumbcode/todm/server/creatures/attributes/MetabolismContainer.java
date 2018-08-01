@@ -2,7 +2,7 @@ package net.dumbcode.todm.server.creatures.attributes;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.nbt.NBTTagCompound;
 

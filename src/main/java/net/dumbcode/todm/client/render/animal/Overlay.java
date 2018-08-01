@@ -1,4 +1,4 @@
-package net.dumbcode.todm.client.render.animals;
+package net.dumbcode.todm.client.render.animal;
 
 import net.dumbcode.dumblibrary.client.animation.AnimatableRenderer;
 import net.dumbcode.dumblibrary.server.entity.EntityAnimatable;

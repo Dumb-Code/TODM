@@ -6,7 +6,7 @@ import lombok.Setter;
 import net.dumbcode.dumblibrary.server.entity.EntityAnimatable;
 import net.dumbcode.dumblibrary.server.entity.GrowthStage;
 import net.dumbcode.todm.TODM;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
 import net.dumbcode.todm.server.entities.EntityHandler;
 import net.ilexiconn.llibrary.server.animation.Animation;

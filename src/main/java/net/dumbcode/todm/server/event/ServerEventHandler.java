@@ -1,7 +1,7 @@
 package net.dumbcode.todm.server.event;
 
 import net.dumbcode.todm.TODM;
-import net.dumbcode.todm.server.creatures.animal.Animal;
+import net.dumbcode.todm.server.creatures.Animal;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
