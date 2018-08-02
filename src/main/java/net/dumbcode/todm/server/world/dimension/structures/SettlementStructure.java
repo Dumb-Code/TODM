@@ -1,4 +1,4 @@
-package net.dumbcode.todm.server.world.old.structures;
+package net.dumbcode.todm.server.world.dimension.structures;
 
 import net.dumbcode.todm.TODM;
 import net.minecraft.util.ResourceLocation;

@@ -9,6 +9,7 @@ import net.minecraft.world.biome.BiomeDecorator;
 
 import java.util.Random;
 
+//TODO:
 public class ScorchedBiome extends Biome {
 
     public ScorchedBiome() {
