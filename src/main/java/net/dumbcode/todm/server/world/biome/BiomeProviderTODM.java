@@ -1,58 +1,57 @@
-package net.dumbcode.todm.server.world.dimension.biome;
+package net.dumbcode.todm.server.world.biome;
 
 import com.google.common.collect.Lists;
-import net.minecraft.crash.CrashReport;
-import net.minecraft.crash.CrashReportCategory;
+import net.dumbcode.todm.server.world.layers.GenLayerBiomes;
 import net.minecraft.init.Biomes;
-import net.minecraft.util.ReportedException;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.WorldType;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeCache;
 import net.minecraft.world.biome.BiomeProvider;
 import net.minecraft.world.gen.layer.GenLayer;
+import net.minecraft.world.gen.layer.GenLayerVoronoiZoom;
 import net.minecraft.world.gen.layer.IntCache;
-import net.minecraft.world.storage.WorldInfo;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
 /*
- * TODO: Go through and rename variables (if I can) and play around with values
  * 99% of this is just minecraft's default
  */
 public class BiomeProviderTODM extends BiomeProvider {
 
     private GenLayer genBiomes;
     private GenLayer biomeIndexLayer;
+    private World world;
     private final BiomeCache biomeCache;
     private final List<Biome> spawnBiomes;
     public static List<Biome> allowedBiomes = Lists.newArrayList(BiomeHandler.SCORCHED_BIOME);
 
 
-    private BiomeProviderTODM(long seed, WorldType worldType)
+    public BiomeProviderTODM(World world)
     {
-        biomeCache = new BiomeCache(this);
-        spawnBiomes = Lists.newArrayList(allowedBiomes);
-        GenLayer[] agenlayer = GenLayer.initializeAllBiomeGenerators(seed, worldType, null);
-        agenlayer = getModdedBiomeGenerators(worldType, seed, agenlayer);
-        this.genBiomes = agenlayer[0];
-        this.biomeIndexLayer = agenlayer[1];
+        this.biomeCache = new BiomeCache(this);
+        this.spawnBiomes = Lists.newArrayList(allowedBiomes);
+        this.world = world;
+        makeLayers(world.getSeed());
     }
 
-    public BiomeProviderTODM(WorldInfo info)
+    private void makeLayers(long seed)
     {
-        this(info.getSeed(), info.getTerrainType());
-    }
-
-    public BiomeCache getBiomeCache() {
-        return biomeCache;
+        GenLayer biomes = new GenLayerBiomes(1L);
+        //TODO:
+        GenLayer voronoiZoom = new GenLayerVoronoiZoom(10L, biomes);
+        voronoiZoom.initWorldGenSeed(seed);
+        biomes.initWorldGenSeed(seed);
+        genBiomes = biomes;
+        biomeIndexLayer = voronoiZoom;
     }
 
     @Override
     public void cleanupCache() {
         this.biomeCache.cleanupCache();
+        super.cleanupCache();
     }
 
     @Override
@@ -61,7 +60,26 @@ public class BiomeProviderTODM extends BiomeProvider {
     }
 
     @Override
+    public Biome[] getBiomesForGeneration(Biome[] biomes, int x, int z, int width, int height)
+    {
+        IntCache.resetIntCache();
+
+        if (biomes == null || biomes.length < width * height)
+        {
+            biomes = new Biome[width * height];
+        }
+
+        int[] aint = this.genBiomes.getInts(x, z, width, height);
+
+        for (int i = 0; i < width * height; ++i)
+        {
+            biomes[i] = Biome.getBiome(aint[i], Biomes.DEFAULT);
+        }
+        return biomes;
+    }
+
     @Nullable
+    @Override
     public BlockPos findBiomePosition(int x, int z, int range, List<Biome> biomes, Random random)
     {
         IntCache.resetIntCache();
@@ -118,24 +136,5 @@ public class BiomeProviderTODM extends BiomeProvider {
 
             return listToReuse;
         }
-    }
-
-    @Override
-    public Biome[] getBiomesForGeneration(Biome[] biomes, int x, int z, int width, int height)
-    {
-        IntCache.resetIntCache();
-
-        if (biomes == null || biomes.length < width * height)
-        {
-            biomes = new Biome[width * height];
-        }
-
-        int[] aint = this.genBiomes.getInts(x, z, width, height);
-
-        for (int i = 0; i < width * height; ++i)
-        {
-            biomes[i] = Biome.getBiome(aint[i], Biomes.DEFAULT);
-        }
-        return biomes;
     }
 }

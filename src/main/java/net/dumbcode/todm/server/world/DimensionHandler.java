@@ -1,4 +1,4 @@
-package net.dumbcode.todm.server.world.dimension;
+package net.dumbcode.todm.server.world;
 
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldType;

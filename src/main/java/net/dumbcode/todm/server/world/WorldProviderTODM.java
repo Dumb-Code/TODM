@@ -1,6 +1,6 @@
-package net.dumbcode.todm.server.world.dimension;
+package net.dumbcode.todm.server.world;
 
-import net.dumbcode.todm.server.world.dimension.biome.BiomeProviderTODM;
+import net.dumbcode.todm.server.world.biome.BiomeProviderTODM;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProvider;
@@ -14,6 +14,6 @@ public class WorldProviderTODM extends WorldProvider {
 
     @Override
     public BiomeProvider getBiomeProvider() {
-        return new BiomeProviderTODM(this.world.getWorldInfo());
+        return new BiomeProviderTODM(this.world);
     }
 }

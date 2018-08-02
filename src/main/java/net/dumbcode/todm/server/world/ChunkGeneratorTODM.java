@@ -1,7 +1,5 @@
-package net.dumbcode.todm.server.world.dimension;
+package net.dumbcode.todm.server.world;
 
-import static net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks;
-import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 import com.google.common.collect.Lists;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
@@ -22,8 +20,10 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
+import static net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks;
+import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
+
 /*
- * TODO: Go through and rename variables (if I can) and play around with values
  * 99% of this is just minecraft's default
  */
 public class ChunkGeneratorTODM implements IChunkGenerator {
@@ -38,7 +38,6 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
     private NoiseGeneratorOctaves maxLimitPerlinNoise;
     private NoiseGeneratorOctaves mainPerlinNoise;
     private NoiseGeneratorPerlin surfaceNoise;
-    private NoiseGeneratorOctaves scaleNoise;
     private NoiseGeneratorOctaves depthNoise;
     private double[] depthBuffer = new double[256];
     private final double[] heightMap = new double[825];
@@ -77,7 +76,6 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
         this.maxLimitPerlinNoise = new NoiseGeneratorOctaves(this.random, 16);
         this.mainPerlinNoise = new NoiseGeneratorOctaves(this.random, 8);
         this.surfaceNoise = new NoiseGeneratorPerlin(this.random, 4);
-        this.scaleNoise = new NoiseGeneratorOctaves(this.random, 10);
         this.depthNoise = new NoiseGeneratorOctaves(this.random, 16);
         this.biomeWeights = new float[25];
 
@@ -95,9 +93,11 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
     public Chunk generateChunk(int x, int z) {
         this.random.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         ChunkPrimer primer = new ChunkPrimer();
-        this.setBlocksInChunk(x, z, primer);
         Biome[] biomes = this.world.getBiomeProvider().getBiomes(this.biomes, x * 16, z * 16, 16, 16);
+        this.setBlocksInChunk(x, z, primer);
         this.replaceBiomeBlocks(x, z, primer, biomes);
+        caveGenerator.generate(this.world, x, z, primer);
+        // Scaling to 1:1 with blocks on the ground
         Chunk chunk = new Chunk(this.world, primer, x, z);
         for(int i = 0; i < chunk.getBiomeArray().length; i++)
         {
@@ -124,50 +124,26 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
         BlockFalling.fallInstantly = false;
     }
 
-    @Override
-    public boolean generateStructures(Chunk chunkIn, int x, int z) {
-        return false;
-    }
-
-    @Override
-    public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
-        return creatures;
-    }
-
-    @Nullable
-    @Override
-    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
-        return null;
-    }
-
-    @Override
-    public void recreateStructures(Chunk chunkIn, int x, int z) {
-
-    }
-
-    @Override
-    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
-        return false;
-    }
-
+    /*
+     * Vanilla method with renamed variables found in Twilight Forest
+     */
     private void generateHeightmap(int x, int y, int z)
     {
+        int terrainIndex = 0;
+        int noiseIndex = 0;
+
         this.depthRegion = this.depthNoise.generateNoiseOctaves(this.depthRegion, x, z, 5, 5, (double)this.depthNoiseScaleX, (double)this.depthNoiseScaleZ, (double)this.depthNoiseScaleExponent);
-        float f = this.coordinateScale;
-        float f1 = this.heightScale;
-        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, x, y, z, 5, 33, 5, (double)(f / this.mainNoiseScaleX), (double)(f1 / this.mainNoiseScaleY), (double)(f / this.mainNoiseScaleZ));
-        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, x, y, z, 5, 33, 5, (double)f, (double)f1, (double)f);
-        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, x, y, z, 5, 33, 5, (double)f, (double)f1, (double)f);
-        int i = 0;
-        int j = 0;
+        this.mainNoiseRegion = this.mainPerlinNoise.generateNoiseOctaves(this.mainNoiseRegion, x, y, z, 5, 33, 5, (double)(this.coordinateScale / this.mainNoiseScaleX), (double)(this.heightScale / this.mainNoiseScaleY), (double)(this.coordinateScale / this.mainNoiseScaleZ));
+        this.minLimitRegion = this.minLimitPerlinNoise.generateNoiseOctaves(this.minLimitRegion, x, y, z, 5, 33, 5, (double)this.coordinateScale, (double)this.heightScale, (double)this.coordinateScale);
+        this.maxLimitRegion = this.maxLimitPerlinNoise.generateNoiseOctaves(this.maxLimitRegion, x, y, z, 5, 33, 5, (double)this.coordinateScale, (double)this.heightScale, (double)this.coordinateScale);
 
         for (int k = 0; k < 5; ++k)
         {
             for (int l = 0; l < 5; ++l)
             {
-                float f2 = 0.0F;
-                float f3 = 0.0F;
-                float f4 = 0.0F;
+                float totalVariation = 0.0F;
+                float totalHeight = 0.0F;
+                float totalFactor = 0.0F;
                 Biome biome = this.biomes[k + 2 + (l + 2) * 10];
 
                 for (int j1 = -2; j1 <= 2; ++j1)
@@ -185,81 +161,85 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
                             f7 /= 2.0F;
                         }
 
-                        f2 += f6 * f7;
-                        f3 += f5 * f7;
-                        f4 += f7;
+                        totalVariation += f6 * f7;
+                        totalHeight += f5 * f7;
+                        totalFactor += f7;
                     }
                 }
 
-                f2 = f2 / f4;
-                f3 = f3 / f4;
-                f2 = f2 * 0.9F + 0.1F;
-                f3 = (f3 * 4.0F - 1.0F) / 8.0F;
-                double d7 = this.depthRegion[j] / 8000.0D;
+                totalVariation = totalVariation / totalFactor;
+                totalHeight = totalHeight / totalFactor;
+                totalVariation = totalVariation * 0.9F + 0.1F;
+                totalHeight = (totalHeight * 4.0F - 1.0F) / 8.0F;
+                double terrainNoise = this.depthRegion[noiseIndex] / 8000.0D;
 
-                if (d7 < 0.0D)
+                if (terrainNoise < 0.0D)
                 {
-                    d7 = -d7 * 0.3D;
+                    terrainNoise = -terrainNoise * 0.3D;
                 }
 
-                d7 = d7 * 3.0D - 2.0D;
+                terrainNoise = terrainNoise * 3.0D - 2.0D;
 
-                if (d7 < 0.0D)
+                if (terrainNoise < 0.0D)
                 {
-                    d7 = d7 / 2.0D;
+                    terrainNoise = terrainNoise / 2.0D;
 
-                    if (d7 < -1.0D)
+                    if (terrainNoise < -1.0D)
                     {
-                        d7 = -1.0D;
+                        terrainNoise = -1.0D;
                     }
 
-                    d7 = d7 / 1.4D;
-                    d7 = d7 / 2.0D;
+                    terrainNoise = terrainNoise / 1.4D;
+                    terrainNoise = terrainNoise / 2.0D;
                 }
                 else
                 {
-                    if (d7 > 1.0D)
+                    if (terrainNoise > 1.0D)
                     {
-                        d7 = 1.0D;
+                        terrainNoise = 1.0D;
                     }
 
-                    d7 = d7 / 8.0D;
+                    terrainNoise = terrainNoise / 8.0D;
                 }
 
-                ++j;
-                double d8 = (double)f3;
-                double d9 = (double)f2;
-                d8 = d8 + d7 * 0.2D;
-                d8 = d8 * (double)this.baseSize / 8.0D;
-                double d0 = (double)this.baseSize + d8 * 4.0D;
+                ++noiseIndex;
+                double heightCalc = (double) totalHeight;
+                double variationCalc = (double) totalVariation;
+                heightCalc += + terrainNoise * 0.2D;
+                heightCalc = heightCalc * (double)this.baseSize / 8.0D;
+                double d0 = (double)this.baseSize + heightCalc * 4.0D;
+
 
                 for (int l1 = 0; l1 < 33; ++l1)
                 {
-                    double d1 = ((double)l1 - d0) * (double)this.stretchY * 128.0D / 256.0D / d9;
+                    double d1 = ((double)l1 - d0) * (double)this.stretchY * 128.0D / 256.0D / variationCalc;
 
                     if (d1 < 0.0D)
                     {
                         d1 *= 4.0D;
                     }
 
-                    double d2 = this.minLimitRegion[i] / (double)this.lowerLimitScale;
-                    double d3 = this.maxLimitRegion[i] / (double)this.upperLimitScale;
-                    double d4 = (this.mainNoiseRegion[i] / 10.0D + 1.0D) / 2.0D;
-                    double d5 = MathHelper.clampedLerp(d2, d3, d4) - d1;
+                    double d2 = this.minLimitRegion[terrainIndex] / (double)this.lowerLimitScale;
+                    double d3 = this.maxLimitRegion[terrainIndex] / (double)this.upperLimitScale;
+                    double d4 = (this.mainNoiseRegion[terrainIndex] / 10.0D + 1.0D) / 2.0D;
+                    double terrainCalc = MathHelper.clampedLerp(d2, d3, d4) - d1;
 
                     if (l1 > 29)
                     {
                         double d6 = (double)((float)(l1 - 29) / 3.0F);
-                        d5 = d5 * (1.0D - d6) + -10.0D * d6;
+                        terrainCalc = terrainCalc * (1.0D - d6) + -10.0D * d6;
                     }
 
-                    this.heightMap[i] = d5;
-                    ++i;
+                    this.heightMap[terrainIndex] = terrainCalc;
+                    ++terrainIndex;
                 }
             }
         }
     }
 
+    /*
+     * Vanilla Method
+     */
     public void setBlocksInChunk(int x, int z, ChunkPrimer primer)
     {
         this.biomes = this.world.getBiomeProvider().getBiomesForGeneration(this.biomes, x * 4 - 2, z * 4 - 2, 10, 10);
@@ -279,7 +259,6 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
 
                 for (int i2 = 0; i2 < 32; ++i2)
                 {
-                    double d0 = 0.125D;
                     double d1 = this.heightMap[i1 + i2];
                     double d2 = this.heightMap[j1 + i2];
                     double d3 = this.heightMap[k1 + i2];
@@ -291,7 +270,6 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
 
                     for (int j2 = 0; j2 < 8; ++j2)
                     {
-                        double d9 = 0.25D;
                         double d10 = d1;
                         double d11 = d2;
                         double d12 = (d3 - d1) * 0.25D;
@@ -299,7 +277,6 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
 
                         for (int k2 = 0; k2 < 4; ++k2)
                         {
-                            double d14 = 0.25D;
                             double d16 = (d11 - d10) * 0.25D;
                             double lvt_45_1_ = d10 - d16;
 
@@ -329,7 +306,10 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
         }
     }
 
-    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomesIn)
+    /*
+     * Vanilla Method
+     */
+    public void replaceBiomeBlocks(int x, int z, ChunkPrimer primer, Biome[] biomes)
     {
         if (!onReplaceBiomeBlocks(this, x, z, primer, this.world))
         {
@@ -342,9 +322,35 @@ public class ChunkGeneratorTODM implements IChunkGenerator {
         {
             for (int j = 0; j < 16; ++j)
             {
-                Biome biome = biomesIn[j + i * 16];
+                Biome biome = biomes[j + i * 16];
                 biome.genTerrainBlocks(this.world, this.random, primer, x * 16 + i, z * 16 + j, this.depthBuffer[j + i * 16]);
             }
         }
+    }
+
+    @Override
+    public boolean generateStructures(Chunk chunkIn, int x, int z) {
+        return false;
+    }
+
+    @Override
+    public List<Biome.SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos) {
+        return creatures;
+    }
+
+    @Nullable
+    @Override
+    public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored) {
+        return null;
+    }
+
+    @Override
+    public void recreateStructures(Chunk chunkIn, int x, int z) {
+
+    }
+
+    @Override
+    public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos) {
+        return false;
     }
 }
