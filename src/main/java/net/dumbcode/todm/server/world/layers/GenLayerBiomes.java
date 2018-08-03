@@ -7,9 +7,6 @@ import net.minecraft.world.gen.layer.IntCache;
 
 import java.util.List;
 
-/**
- * http://jsfiddle.net/eddyb/NFa3P/
- */
 public class GenLayerBiomes extends GenLayer
 {
     private static final int RARE_BIOME_CHANCE = 15;
@@ -27,6 +24,7 @@ public class GenLayerBiomes extends GenLayer
 
     /**
      * Setting the biomes
+     * Originally from Twilight Forest
      */
     @Override
     public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight) {

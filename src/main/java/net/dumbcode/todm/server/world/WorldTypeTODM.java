@@ -9,7 +9,7 @@ import net.minecraft.world.gen.IChunkGenerator;
 public class WorldTypeTODM extends WorldType {
 
     public WorldTypeTODM() {
-        super("TODM");
+        super("todm");
     }
 
     @Override

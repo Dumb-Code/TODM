@@ -3,7 +3,10 @@ package net.dumbcode.todm.server.world.layers;
 import net.minecraft.world.gen.layer.*;
 
 /**
- *
+ * Derived a lot of what I learned from Betweenlands and Twilight Forest,
+ * so special thanks to them.
+ * Checkout this website, if you need help understanding what each genlayer does.
+ * @URL http://jsfiddle.net/eddyb/NFa3P/
  */
 public abstract class GenLayerTODM extends GenLayer
 {
