@@ -20,12 +20,12 @@ public abstract class GenLayerTODM extends GenLayer
     {
         GenLayer genLayer = new GenLayerIsland(1L);
         genLayer = new GenLayerFuzzyZoom(2000L, genLayer);
-
-        genLayer = new GenLayerBiomes(100L, genLayer);
+        genLayer = new GenLayerBiomes(200L, genLayer);
         //Just zoom in a certain amount of times (In this case twice)
-        genLayer = GenLayerZoom.magnify(2000L, genLayer, 1);
+        genLayer = GenLayerZoom.magnify(1000L, genLayer, 1);
         genLayer = new GenLayerSmooth(1000L, genLayer);
         GenLayer indexLayer = new GenLayerRiver(1L, genLayer);
+        indexLayer = new GenLayerSmooth(1000L, indexLayer);
         indexLayer = new GenLayerRiverMix(100L, genLayer, indexLayer);
         indexLayer = new GenLayerVoronoiZoom(10L, indexLayer);
         indexLayer.initWorldGenSeed(seed);

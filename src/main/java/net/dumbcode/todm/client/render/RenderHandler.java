@@ -28,6 +28,7 @@ public class RenderHandler
     private static void init()
     {
         registerItemRenderer(ItemHandler.CROSSBOW, "crossbow");
+        registerItemRenderer(ItemHandler.CRYSTALLITE_SHARD, "crystallite_shard");
         registerItemRenderer(ItemHandler.LONGSWORD_DIAMOND, "longsword_diamond.ttm");
         registerItemRenderer(ItemHandler.LONGSWORD_GOLD, "longsword_gold.ttm");
         registerItemRenderer(ItemHandler.LONGSWORD_IRON, "longsword_iron.ttm");

@@ -23,8 +23,8 @@ import java.util.Random;
 import static net.minecraftforge.event.ForgeEventFactory.onReplaceBiomeBlocks;
 import static net.minecraftforge.event.terraingen.InitMapGenEvent.EventType.CAVE;
 
-/*
- * 99% of this is just minecraft's default
+/**
+ * @URL https://minecraft.gamepedia.com/Customized
  */
 public class ChunkGeneratorTODM implements IChunkGenerator {
 

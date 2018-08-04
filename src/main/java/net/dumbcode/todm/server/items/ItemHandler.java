@@ -15,6 +15,7 @@ import java.util.List;
 public class ItemHandler
 {
 
+    public static final BasicItem CRYSTALLITE_SHARD = new BasicItem("Crystallite Shard");
     public static final CrossbowItem CROSSBOW = new CrossbowItem("Crossbow");
     public static final LongSwordItem LONGSWORD_DIAMOND = new LongSwordItem("Longsword", Item.ToolMaterial.DIAMOND, WeaponType.DIAMOND);
     public static final LongSwordItem LONGSWORD_GOLD = new LongSwordItem("Longsword", Item.ToolMaterial.GOLD, WeaponType.GOLD);
@@ -30,6 +31,7 @@ public class ItemHandler
         items.add(LONGSWORD_GOLD);
         items.add(LONGSWORD_IRON);
         items.add(LONGSWORD_SCORCHING);
+        items.add(CRYSTALLITE_SHARD);
     }
 
     @SubscribeEvent

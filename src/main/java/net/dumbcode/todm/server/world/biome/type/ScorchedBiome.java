@@ -16,7 +16,11 @@ public class ScorchedBiome extends Biome {
 
     public ScorchedBiome()
     {
-        super(new BiomeProperties("Scorched").setWaterColor(0xd2a679));
+        super(new BiomeProperties("Scorched")
+                .setWaterColor(0xd2a679)
+                .setBaseHeight(0)
+                .setHeightVariation(.1F)
+        );
         this.topBlock = Blocks.GRASS.getDefaultState();
         this.fillerBlock = Blocks.DIRT.getDefaultState();
     }

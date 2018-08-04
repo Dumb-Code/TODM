@@ -20,7 +20,7 @@ public enum DimensionHandler {
     }
 
     @Nullable
-    private static Integer getID()
+    private Integer getID()
     {
         for (int i=2; i<Integer.MAX_VALUE; i++)
         {
