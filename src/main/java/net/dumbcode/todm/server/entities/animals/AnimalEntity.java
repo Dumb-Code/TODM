@@ -9,9 +9,10 @@ import net.dumbcode.todm.TODM;
 import net.dumbcode.todm.server.creatures.Animal;
 import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
 import net.dumbcode.todm.server.entities.EntityHandler;
+import net.dumbcode.todm.server.entities.ai.AdvancedAIManager;
+import net.dumbcode.todm.server.entities.ai.base.WanderAI;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -24,7 +25,7 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
 
     private Animal animal = Animal.MISSING;
     private MetabolismContainer metabolism;
-    private EntityAITasks tasks;
+    private AdvancedAIManager taskManager;
     private boolean isCarcass = false;
     private boolean isMale;
     private int age;
@@ -34,7 +35,8 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     {
         super(world);
         this.setAnimal();
-        this.tasks = new EntityAITasks(world.profiler);
+        this.taskManager = new AdvancedAIManager(this);
+        this.taskManager.getTasks().add(new WanderAI(this, 1.2));
         this.metabolism = new MetabolismContainer(animal);
         this.initMetabolism();
         this.age = 0;
@@ -63,6 +65,7 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
                     this.setDead();
                 }
             }
+            taskManager.update();
             metabolism.update(this);
         }
     }

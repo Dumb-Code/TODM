@@ -1,4 +1,4 @@
-package net.dumbcode.todm.server.entities.dragons;
+package net.dumbcode.todm.server.entities.animals.dragons;
 
 import io.netty.buffer.ByteBuf;
 import lombok.Getter;
