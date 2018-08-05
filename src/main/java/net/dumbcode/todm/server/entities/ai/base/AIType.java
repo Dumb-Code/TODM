@@ -1,4 +1,4 @@
-package net.dumbcode.todm.server.entities.ai;
+package net.dumbcode.todm.server.entities.ai.base;
 
 import lombok.Getter;
 

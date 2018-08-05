@@ -1,22 +1,25 @@
-package net.dumbcode.todm.server.entities.ai;
+package net.dumbcode.todm.server.entities.ai.base;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Queues;
 import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.entity.EntityLiving;
 
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Queue;
 
 @Getter
+@Setter
 public class AdvancedAIManager
 {
 
-    private List<AdvancedAIBase> tasks = Lists.newLinkedList();
-    // TODO: Maybe a better way that's not as performance taxing?
-    private List<AdvancedAIBase> currentTasks = Lists.newCopyOnWriteArrayList();
-
+    private final List<AdvancedAIBase> tasks = Lists.newLinkedList();
+    private final Queue<AdvancedAIBase> currentTasks = Queues.newConcurrentLinkedQueue();
     private final EntityLiving entity;
+    private int updateRate = 20;
 
     public AdvancedAIManager(EntityLiving entity)
     {
@@ -29,7 +32,7 @@ public class AdvancedAIManager
      */
     public void update()
     {
-        if (this.entity.ticksExisted % 20 == 0)
+        if (this.entity.ticksExisted % updateRate == 0)
         {
             this.sortTasks();
             Iterator<AdvancedAIBase> taskIt = tasks.iterator();
@@ -42,7 +45,7 @@ public class AdvancedAIManager
                     task.execute();
                 } else if (task.shouldExecute() && !currentTasks.isEmpty())
                 {
-                    if (currentTasks.get(0).isConcurrent() && task.isConcurrent())
+                    if (currentTasks.peek().isConcurrent() && task.isConcurrent())
                     {
                         currentTasks.add(task);
                         task.execute();

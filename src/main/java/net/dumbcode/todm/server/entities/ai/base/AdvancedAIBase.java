@@ -1,4 +1,4 @@
-package net.dumbcode.todm.server.entities.ai;
+package net.dumbcode.todm.server.entities.ai.base;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -57,8 +57,7 @@ public abstract class AdvancedAIBase
      * Should the task be executed? By default it just sees if the importance
      * is greater than the threshold. It uses a sigmoid function to clamp and map the
      * value between 0 and 1 on an s curve. For example, an importance of 0 would equal a 0.5 using sigmoid.
-     *
-     * @return
+     * @return true if the task should execute
      */
     public boolean shouldExecute()
     {
@@ -70,7 +69,6 @@ public abstract class AdvancedAIBase
      */
     public void update()
     {
-
     }
 
     /**
@@ -81,8 +79,7 @@ public abstract class AdvancedAIBase
 
     /**
      * Should the task continue executing?
-     *
-     * @return
+     * @return true if the task should continue
      */
     public abstract boolean shouldContinue();
 }

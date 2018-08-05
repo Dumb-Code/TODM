@@ -1,7 +1,7 @@
-package net.dumbcode.todm.server.entities.ai.base;
+package net.dumbcode.todm.server.entities.ai;
 
-import net.dumbcode.todm.server.entities.ai.AIType;
-import net.dumbcode.todm.server.entities.ai.AdvancedAIBase;
+import net.dumbcode.todm.server.entities.ai.base.AIType;
+import net.dumbcode.todm.server.entities.ai.base.AdvancedAIBase;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.RandomPositionGenerator;
