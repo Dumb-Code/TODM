@@ -43,6 +43,7 @@ gradlew.bat idea
 * [TheXFactor117](https://github.com/TheXFactor117)
 * [jglrxavpok](https://github.com/jglrxavpok)
 * [Gegy](https://github.com/gegy1000)
+* [BobMowzie](https://github.com/BobMowzie)
 
 #### Modelers
 * HarvNut

@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 public class MathUtils
 {
 
-    public double sigmoid(double x)
+    public static double sigmoid(double x)
     {
         return 1 / (1 + Math.exp(-x));
     }

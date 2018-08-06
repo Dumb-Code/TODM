@@ -45,7 +45,7 @@ public class AdvancedAIManager
                     task.execute();
                 } else if (task.shouldExecute() && !currentTasks.isEmpty())
                 {
-                    if (currentTasks.peek().isConcurrent() && task.isConcurrent())
+                    if (currentTasks.peek().isConcurrent() && task.isConcurrent() || task.getType().equals(AIType.ANIMATION))
                     {
                         currentTasks.add(task);
                         task.execute();
@@ -60,13 +60,13 @@ public class AdvancedAIManager
                     AdvancedAIBase task = it.next();
                     if (task.isFinished())
                     {
+                        currentTasks.remove(task);
+                    } else
+                    {
                         if (task.shouldContinue())
                         {
                             task.execute();
                         }
-                        currentTasks.remove(task);
-                    } else
-                    {
                         if (task.isUpdatable())
                         {
                             task.update();
