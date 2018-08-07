@@ -56,4 +56,10 @@ public class WanderAI extends AdvancedAIBase
         }
         return true;
     }
+
+    @Override
+    public void checkImportance()
+    {
+        this.setImportance(0);
+    }
 }

@@ -17,7 +17,7 @@ public class AIUtils
      * @param y      entity y position
      * @param k      center z position
      * @param radius radius you want to search through
-     * @return array of all block positions in the circle.
+     * @return list of all block positions in the circle.
      */
     public static List<BlockPos> traverXZ(int h, int y, int k, int radius)
     {

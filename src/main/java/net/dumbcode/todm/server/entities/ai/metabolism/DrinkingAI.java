@@ -27,9 +27,6 @@ public class DrinkingAI extends AdvancedAIBase
     @Override
     public boolean shouldExecute()
     {
-        this.setImportance();
-        System.out.println(this.getCurrentCooldown());
-        System.out.println(entity.getMetabolism().getCurrentWater());
         if (super.shouldExecute())
         {
             List<BlockPos> pos = AIUtils.traverXZ((int) entity.posX, (int) entity.posY - 1, (int) entity.posZ, 10);
@@ -65,7 +62,8 @@ public class DrinkingAI extends AdvancedAIBase
         return true;
     }
 
-    private void setImportance()
+    @Override
+    public void checkImportance()
     {
         MetabolismContainer meta = entity.getMetabolism();
         if (meta.isDehydrated())
@@ -79,4 +77,5 @@ public class DrinkingAI extends AdvancedAIBase
             this.setImportance(0);
         }
     }
+
 }

@@ -103,4 +103,6 @@ public abstract class AdvancedAIBase
             currentCooldown--;
         }
     }
+
+    public abstract void checkImportance();
 }

@@ -34,6 +34,7 @@ public class AdvancedAIManager
     {
         if (this.entity.ticksExisted % updateRate == 0)
         {
+            tasks.forEach(AdvancedAIBase::checkImportance);
             this.sortTasks();
             Iterator<AdvancedAIBase> taskIt = tasks.iterator();
             while (taskIt.hasNext())
