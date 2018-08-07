@@ -34,16 +34,16 @@ public class MetabolismContainer
     {
         if (entity.ticksExisted % 20 == 0)
         {
-            if ((currentFood = -decreaseFoodRate) > 0)
+            if ((currentFood -= decreaseFoodRate) > 0)
             {
-                currentFood = -decreaseFoodRate;
+                currentFood -= decreaseFoodRate;
             } else
             {
                 currentFood = 0;
             }
-            if ((currentWater = -decreaseWaterRate) > 0)
+            if ((currentWater -= decreaseWaterRate) > 0)
             {
-                currentWater = -decreaseWaterRate;
+                currentWater -= decreaseWaterRate;
             } else
             {
                 currentWater = 0;
@@ -72,12 +72,18 @@ public class MetabolismContainer
         if (currentWater == animal.getHydratedAmount())
         {
             setHydrated(true);
-        } else if (currentWater <= animal.getThirstyAmount())
+            setThirsty(false);
+            setHydrated(false);
+        } else if (currentWater <= animal.getThirstyAmount() && !isThirsty())
         {
             setThirsty(true);
-        } else if (currentWater <= animal.getDehydratedAmount())
+            setHydrated(false);
+            setDehydrated(false);
+        } else if (currentWater <= animal.getDehydratedAmount() && !isDehydrated())
         {
             setDehydrated(true);
+            setThirsty(false);
+            setHydrated(false);
         }
     }
 

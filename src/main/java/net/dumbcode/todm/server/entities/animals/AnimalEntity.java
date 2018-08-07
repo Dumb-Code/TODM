@@ -11,6 +11,7 @@ import net.dumbcode.todm.server.creatures.attributes.MetabolismContainer;
 import net.dumbcode.todm.server.entities.EntityHandler;
 import net.dumbcode.todm.server.entities.ai.WanderAI;
 import net.dumbcode.todm.server.entities.ai.base.AdvancedAIManager;
+import net.dumbcode.todm.server.entities.ai.metabolism.DrinkingAI;
 import net.ilexiconn.llibrary.server.animation.Animation;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,13 +31,15 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     private boolean isMale;
     private int age;
     private GrowthStage growthStage;
+    private double movementSpeed = .3;
 
     public AnimalEntity(World world)
     {
         super(world);
         this.setAnimal();
         this.taskManager = new AdvancedAIManager(this);
-        this.taskManager.getTasks().add(new WanderAI(this, 1.2));
+        this.taskManager.getTasks().add(new WanderAI(this));
+        this.taskManager.getTasks().add(new DrinkingAI(this, 20));
         this.metabolism = new MetabolismContainer(animal);
         this.initMetabolism();
         this.age = 0;
@@ -72,8 +75,8 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
 
     public void initMetabolism()
     {
-        metabolism.setDecreaseFoodRate(2);
-        metabolism.setDecreaseWaterRate(3);
+        metabolism.setDecreaseFoodRate(4);
+        metabolism.setDecreaseWaterRate(50);
     }
 
     public GrowthStage getAppropriateStage()

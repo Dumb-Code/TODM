@@ -19,7 +19,7 @@ public class AdvancedAIManager
     private final List<AdvancedAIBase> tasks = Lists.newLinkedList();
     private final Queue<AdvancedAIBase> currentTasks = Queues.newConcurrentLinkedQueue();
     private final EntityLiving entity;
-    private int updateRate = 20;
+    private final int updateRate = 20;
 
     public AdvancedAIManager(EntityLiving entity)
     {
@@ -39,13 +39,17 @@ public class AdvancedAIManager
             while (taskIt.hasNext())
             {
                 AdvancedAIBase task = taskIt.next();
+                if (task.isUsesCooldown())
+                {
+                    task.tickCooldown();
+                }
                 if (task.shouldExecute() && currentTasks.isEmpty())
                 {
                     currentTasks.add(task);
                     task.execute();
                 } else if (task.shouldExecute() && !currentTasks.isEmpty())
                 {
-                    if (currentTasks.peek().isConcurrent() && task.isConcurrent() || task.getType().equals(AIType.ANIMATION))
+                    if (currentTasks.peek().isConcurrent() && (task.isConcurrent() || task.getType().equals(AIType.ANIMATION)))
                     {
                         currentTasks.add(task);
                         task.execute();

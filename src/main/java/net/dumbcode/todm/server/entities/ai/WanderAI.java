@@ -7,9 +7,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.RandomPositionGenerator;
 import net.minecraft.util.math.Vec3d;
 
-/**
- * Just a test AI
- */
 public class WanderAI extends AdvancedAIBase
 {
 
@@ -20,13 +17,13 @@ public class WanderAI extends AdvancedAIBase
     private double speed;
 
 
-    public WanderAI(EntityLiving entity, double speed)
+    public WanderAI(EntityLiving entity)
     {
         super(entity);
         this.entity = (AnimalEntity) entity;
         this.setType(AIType.MOVEMENT);
         this.setUpdatable(false);
-        this.speed = speed;
+        this.speed = this.entity.getMovementSpeed();
     }
 
     @Override
@@ -34,25 +31,29 @@ public class WanderAI extends AdvancedAIBase
     {
         if (this.entity.getTaskManager().getCurrentTasks().isEmpty())
         {
-            Vec3d target = RandomPositionGenerator.findRandomTarget(this.entity, 6, 2);
+            Vec3d target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 2);
             x = target.x;
             y = target.y;
             z = target.z;
             return true;
         }
-        return super.shouldExecute();
+        return false;
     }
 
     @Override
     public void execute()
     {
         this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
-        this.setFinished(true);
     }
 
     @Override
     public boolean shouldContinue()
     {
-        return false;
+        if (entity.getNavigator().noPath())
+        {
+            this.setFinished(true);
+            return false;
+        }
+        return true;
     }
 }
