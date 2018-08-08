@@ -32,7 +32,7 @@ public class MetabolismContainer
 
     public void update(AnimalEntity entity)
     {
-        if (entity.ticksExisted % 20 == 0)
+        if (entity.ticksExisted % 30 == 0)
         {
             if ((currentFood -= decreaseFoodRate) > 0)
             {
@@ -55,35 +55,41 @@ public class MetabolismContainer
 
     public void getAnimalFoodLevel()
     {
-        if (currentFood == animal.getFullAmount())
+        if (currentFood > animal.getHungryAmount() && !isFull())
         {
-            setFull(true);
-        } else if (currentFood <= animal.getHungryAmount())
+            full = true;
+            hungry = false;
+            starving = false;
+        } else if (currentFood <= animal.getHungryAmount() && !isHungry())
         {
-            setHungry(true);
-        } else if (currentFood <= animal.getStarvingAmount())
+            full = false;
+            hungry = true;
+            starving = false;
+        } else if (currentFood <= animal.getStarvingAmount() && !isStarving())
         {
-            setStarving(true);
+            full = false;
+            hungry = false;
+            starving = true;
         }
     }
 
     public void getAnimalThirstLevel()
     {
-        if (currentWater == animal.getHydratedAmount())
+        if (currentWater > animal.getThirstyAmount())
         {
-            setHydrated(true);
-            setThirsty(false);
-            setHydrated(false);
+            hydrated = true;
+            thirsty = false;
+            dehydrated = false;
         } else if (currentWater <= animal.getThirstyAmount() && !isThirsty())
         {
-            setThirsty(true);
-            setHydrated(false);
-            setDehydrated(false);
+            hydrated = false;
+            thirsty = true;
+            dehydrated = false;
         } else if (currentWater <= animal.getDehydratedAmount() && !isDehydrated())
         {
-            setDehydrated(true);
-            setThirsty(false);
-            setHydrated(false);
+            hydrated = false;
+            thirsty = false;
+            dehydrated = true;
         }
     }
 

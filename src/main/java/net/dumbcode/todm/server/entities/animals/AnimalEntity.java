@@ -37,14 +37,14 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
     {
         super(world);
         this.setAnimal();
-        this.taskManager = new AdvancedAIManager(this);
-        this.taskManager.getTasks().add(new WanderAI(this));
-        this.taskManager.getTasks().add(new DrinkingAI(this, 20));
         this.metabolism = new MetabolismContainer(animal);
         this.initMetabolism();
         this.age = 0;
         this.growthStage = GrowthStage.INFANT;
         this.isMale = this.rand.nextFloat() > .5F;
+        this.taskManager = new AdvancedAIManager(this);
+        this.taskManager.getTasks().add(new WanderAI(this));
+        this.taskManager.getTasks().add(new DrinkingAI(this, 20, 50));
     }
 
     public AnimalEntity(World world, Animal animal)
@@ -159,7 +159,7 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         compound.setBoolean("isCarcass", this.isCarcass);
         compound.setBoolean("isMale", this.isMale);
         compound.setString("growthStage", this.growthStage.name());
-        this.getMetabolism().writeToNBT(compound);
+        this.metabolism.writeToNBT(compound);
         return compound;
     }
 
@@ -171,6 +171,6 @@ public class AnimalEntity extends EntityCreature implements IEntityAdditionalSpa
         this.setCarcass(compound.getBoolean("isCarcass"));
         this.setMale(compound.getBoolean("isMale"));
         this.setGrowthStage(GrowthStage.valueOf(compound.getString("growthStage")));
-        this.getMetabolism().readFromNBT(compound);
+        this.metabolism.readFromNBT(compound);
     }
 }

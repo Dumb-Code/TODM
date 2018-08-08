@@ -7,23 +7,24 @@ import java.util.List;
 
 public enum Diet
 {
-    CARNIVOR(FoodHelper.getItemsForDiet(FoodHelper.FoodType.MEAT), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.MEAT)),
-    HERBIVOR(FoodHelper.getItemsForDiet(FoodHelper.FoodType.PLANT), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.PLANT)),
-    PISCIVORE(FoodHelper.getItemsForDiet(FoodHelper.FoodType.FISH), FoodHelper.getBlocksForDiet(FoodHelper.FoodType.PLANT)),
+    CARNIVORE(FoodHelper.FoodType.MEAT),
+    HERBIVORE(FoodHelper.FoodType.PLANT),
+    PISCIVORE(FoodHelper.FoodType.FISH),
     CUSTOM();
 
     private List<Item> items;
     private List<Block> blocks;
+    private FoodHelper helper = FoodHelper.INSTANCE;
 
     Diet()
     {
 
     }
 
-    Diet(List<Item> items, List<Block> blocks)
+    Diet(FoodHelper.FoodType foodType)
     {
-        this.items = items;
-        this.blocks = blocks;
+        items = helper.getItemsForDiet(foodType);
+        blocks = helper.getBlocksForDiet(foodType);
     }
 
     public List<Item> getItems()

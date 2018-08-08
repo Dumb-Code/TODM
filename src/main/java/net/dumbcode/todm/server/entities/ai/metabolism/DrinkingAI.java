@@ -15,12 +15,16 @@ public class DrinkingAI extends AdvancedAIBase
 {
 
     private AnimalEntity entity;
+    private static MetabolismContainer meta;
     private BlockPos pos;
+    private int water;
 
-    public DrinkingAI(EntityLiving entity, int cooldown)
+    public DrinkingAI(EntityLiving entity, int cooldown, int water)
     {
         super(entity, AIType.METABOLISM, cooldown);
         this.entity = (AnimalEntity) entity;
+        this.water = water;
+        meta = this.entity.getMetabolism();
         this.setThreshold(.6);
     }
 
@@ -48,13 +52,13 @@ public class DrinkingAI extends AdvancedAIBase
     {
         super.execute();
         entity.getNavigator().tryMoveToXYZ(pos.getX() + 1, pos.getY(), pos.getZ(), entity.getMovementSpeed());
-        entity.getMetabolism().drink(3000);
+        entity.getMetabolism().drink(water);
     }
 
     @Override
     public boolean shouldContinue()
     {
-        if (entity.getNavigator().noPath())
+        if (entity.getNavigator().noPath() && meta.isHydrated())
         {
             this.setFinished(true);
             return false;
@@ -65,7 +69,6 @@ public class DrinkingAI extends AdvancedAIBase
     @Override
     public void checkImportance()
     {
-        MetabolismContainer meta = entity.getMetabolism();
         if (meta.isDehydrated())
         {
             this.setImportance(.6 * this.getWeight());

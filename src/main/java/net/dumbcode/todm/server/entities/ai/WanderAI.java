@@ -5,6 +5,7 @@ import net.dumbcode.todm.server.entities.ai.base.AdvancedAIBase;
 import net.dumbcode.todm.server.entities.animals.AnimalEntity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.math.Vec3d;
 
 public class WanderAI extends AdvancedAIBase
@@ -15,6 +16,7 @@ public class WanderAI extends AdvancedAIBase
     private double y;
     private double z;
     private double speed;
+    private PathNavigate navigator;
 
 
     public WanderAI(EntityLiving entity)
@@ -24,32 +26,27 @@ public class WanderAI extends AdvancedAIBase
         this.setType(AIType.MOVEMENT);
         this.setUpdatable(false);
         this.speed = this.entity.getMovementSpeed();
+        this.navigator = this.entity.getNavigator();
     }
 
     @Override
     public boolean shouldExecute()
     {
-        if (this.entity.getTaskManager().getCurrentTasks().isEmpty())
-        {
-            Vec3d target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 2);
-            x = target.x;
-            y = target.y;
-            z = target.z;
-            return true;
-        }
-        return false;
+        return this.entity.getTaskManager().getCurrentTasks().isEmpty() && this.navigator.noPath();
     }
 
+    //TODO: Sudo random is generating same length targets too often.
     @Override
     public void execute()
     {
-        this.entity.getNavigator().tryMoveToXYZ(this.x, this.y, this.z, this.speed);
+        Vec3d target = RandomPositionGenerator.findRandomTarget(this.entity, 10, 2);
+        this.entity.getNavigator().tryMoveToXYZ(target.x, target.y, target.z, this.speed);
     }
 
     @Override
     public boolean shouldContinue()
     {
-        if (entity.getNavigator().noPath())
+        if (this.navigator.noPath())
         {
             this.setFinished(true);
             return false;

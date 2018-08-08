@@ -72,13 +72,6 @@ public abstract class AdvancedAIBase
     }
 
     /**
-     * If the task is updatable, it will be updated every second (currently)
-     */
-    public void update()
-    {
-    }
-
-    /**
      * Executes the task
      * Ex: Move the entity
      */
@@ -88,10 +81,24 @@ public abstract class AdvancedAIBase
     }
 
     /**
+     * If the task is updatable, it will be updated every time
+     * the ai manager updates
+     */
+    public void update()
+    {
+    }
+
+    /**
      * Should the task continue executing?
      * @return true if the task should continue
      */
     public abstract boolean shouldContinue();
+
+    /**
+     * Checks the importance of the task before the shouldExecute is called
+     * so put all of your setImportance stuff in here.
+     */
+    public abstract void checkImportance();
 
     /**
      * Subtracts from the cooldown timer.
@@ -104,5 +111,4 @@ public abstract class AdvancedAIBase
         }
     }
 
-    public abstract void checkImportance();
 }

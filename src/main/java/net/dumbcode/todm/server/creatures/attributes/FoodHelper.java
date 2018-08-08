@@ -17,21 +17,21 @@ public enum FoodHelper
 {
     INSTANCE;
 
-    private static final Map<Item, FoodNutrient> food = Maps.newHashMap();
-    private static final Map<Block, FoodNutrient> foodBlocks = Maps.newHashMap();
+    private final Map<Item, FoodNutrient> food = Maps.newHashMap();
+    private final Map<Block, FoodNutrient> foodBlocks = Maps.newHashMap();
 
-    public static void registerItem(Item item, FoodType type, int calories)
+    public void registerItem(Item item, FoodType type, int calories)
     {
         food.put(item, new FoodNutrient(type, calories));
     }
 
-    public static void registerBlock(Block block, FoodType type, int calories)
+    public void registerBlock(Block block, FoodType type, int calories)
     {
         foodBlocks.put(block, new FoodNutrient(type, calories));
     }
 
     @SuppressWarnings("unchecked")
-    public static List<Item> getItemsForDiet(FoodHelper.FoodType type)
+    public List<Item> getItemsForDiet(FoodHelper.FoodType type)
     {
         return (List) FoodHelper.INSTANCE.getFood().entrySet().stream()
                 .filter(s -> s.getKey().equals(type))
@@ -39,7 +39,7 @@ public enum FoodHelper
     }
 
     @SuppressWarnings("unchecked")
-    public static List<Block> getBlocksForDiet(FoodHelper.FoodType type)
+    public List<Block> getBlocksForDiet(FoodHelper.FoodType type)
     {
         return (List) FoodHelper.INSTANCE.getFoodBlocks().entrySet().stream()
                 .filter(s -> s.getKey().equals(type))

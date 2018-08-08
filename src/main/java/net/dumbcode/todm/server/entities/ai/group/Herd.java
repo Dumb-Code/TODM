@@ -5,14 +5,15 @@ import lombok.Setter;
 import net.minecraft.entity.EntityLiving;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class Herd
 {
 
-    private EntityLiving leader;
-    private List<EntityLiving> members;
+    private UUID leader;
+    private List<UUID> members;
 
     private int herdSize;
 
@@ -23,10 +24,14 @@ public class Herd
 
     public void addMember(EntityLiving entity)
     {
-        if (members.size() >= herdSize)
+        if (members.size() < herdSize)
         {
-            return;
+            members.add(entity.getUniqueID());
         }
-        members.add(entity);
+    }
+
+    public void removeMember(EntityLiving entity)
+    {
+        members.remove(entity.getUniqueID());
     }
 }

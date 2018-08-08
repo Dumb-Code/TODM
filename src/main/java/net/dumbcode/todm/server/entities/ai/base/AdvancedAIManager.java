@@ -7,7 +7,6 @@ import lombok.Setter;
 import net.minecraft.entity.EntityLiving;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 
@@ -36,10 +35,8 @@ public class AdvancedAIManager
         {
             tasks.forEach(AdvancedAIBase::checkImportance);
             this.sortTasks();
-            Iterator<AdvancedAIBase> taskIt = tasks.iterator();
-            while (taskIt.hasNext())
+            for (AdvancedAIBase task : tasks)
             {
-                AdvancedAIBase task = taskIt.next();
                 if (task.isUsesCooldown())
                 {
                     task.tickCooldown();
@@ -59,10 +56,8 @@ public class AdvancedAIManager
             }
             if (!currentTasks.isEmpty())
             {
-                Iterator<AdvancedAIBase> it = currentTasks.iterator();
-                while (it.hasNext())
+                for (AdvancedAIBase task : currentTasks)
                 {
-                    AdvancedAIBase task = it.next();
                     if (task.isFinished())
                     {
                         currentTasks.remove(task);
